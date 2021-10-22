@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("cn.bngel.bngelbookuserprovider8001.mapper")
+@MapperScan("cn.bngel.bngelbookuserprovider8001.dao")
 public class BngelbookUserProvider8001Application {
 
     public static void main(String[] args) {

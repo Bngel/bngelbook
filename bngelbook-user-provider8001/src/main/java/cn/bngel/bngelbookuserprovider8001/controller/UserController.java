@@ -45,19 +45,18 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "User - 修改用户名")
-    @PutMapping("/user/update/username")
-    public CommonResult updateUsernameById(@RequestParam("id") Long id,
-                                           @RequestParam("username") String username) {
-        if (username.length() > User.MAX_LENGTH_OF_USERNAME) {
+    @ApiOperation(value = "User - 修改用户信息")
+    @PutMapping("/user")
+    public CommonResult updateUserById(@RequestBody User user) {
+        if (user.getUsername().length() > User.MAX_LENGTH_OF_USERNAME) {
             return new CommonResult(User.OVER_LENGTH_ERROR_CODE, User.OVER_LENGTH_ERROR_MESSAGE);
         }
-        Integer result = userService.updateUsernameById(id, username);
+        Integer result = userService.updateUserById(user);
         if (result == 1) {
-            log.info("更改用户名[" + id + "]: " + username);
+            log.info("更改用户信息[" + user.getId() + "]: " + user.getUsername());
             return CommonResult.commonSuccessResult();
         } else {
-            log.info("更改用户名[" + id + "]: 失败");
+            log.info("更改用户信息[" + user.getId() + "]: 失败");
             return CommonResult.commonFailureResult();
         }
     }

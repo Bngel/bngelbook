@@ -1,0 +1,18 @@
+package cn.bngel.bngelbookuserprovider8001.dao;
+
+import cn.bngel.bngelbookuserprovider8001.bean.User;
+import org.apache.ibatis.annotations.*;
+
+@Mapper
+public interface UserDao {
+
+    Integer saveUser(@Param("user") User user);
+
+    Integer deleteUserById(@Param("id") Long id);
+
+    User getUserById(@Param("id") Long id);
+
+    User login(@Param("account") String account, @Param("password") String password);
+
+    Integer updateUserById(@Param("user") User user);
+}

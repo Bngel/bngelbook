@@ -1,8 +1,7 @@
 package cn.bngel.bngelbookuserprovider8001.service;
 
 import cn.bngel.bngelbookuserprovider8001.bean.User;
-import cn.bngel.bngelbookuserprovider8001.mapper.UserMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.bngel.bngelbookuserprovider8001.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,31 +9,31 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserMapper userMapper;
+    private UserDao userDao;
 
     @Override
     public Integer saveUser(User user) {
-        return userMapper.insert(user);
+        return userDao.saveUser(user);
     }
 
     @Override
     public Integer deleteUserById(Long id) {
-        return userMapper.deleteById(id);
+        return userDao.deleteUserById(id);
     }
 
     @Override
-    public Integer updateUser(User user) {
-        return userMapper.updateById(user);
+    public Integer updateUserById(User user) {
+        return userDao.updateUserById(user);
     }
 
     @Override
     public User getUserById(Long id) {
-        return userMapper.selectById(id);
+        return userDao.getUserById(id);
     }
 
     @Override
     public User login(String account, String password) {
-        return userMapper.login(account, password);
+        return userDao.login(account, password);
     }
 
     @Override
@@ -42,6 +41,6 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         user.setId(id);
         user.setUsername(username);
-        return userMapper.updateById(user);
+        return userDao.updateUserById(user);
     }
 }

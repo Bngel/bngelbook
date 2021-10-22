@@ -16,3 +16,8 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yaml
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml

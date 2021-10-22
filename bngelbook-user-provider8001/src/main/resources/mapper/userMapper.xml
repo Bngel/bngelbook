@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bngel.bngelbookuserprovider8001.dao.UserDao">
+
+    <insert id="saveUser">
+        insert into bngel_user(username, password, phone, email, gender, birthday, register_date, profile)
+         values (#{user.username}, #{user.password}, #{user.phone}, #{user.email}, #{user.gender},
+                 #{user.birthday}, now(), #{user.profile})
+    </insert>
+
+    <delete id="deleteUserById">
+        delete from bngel_user where id = #{id}
+    </delete>
+
+    <select id="getUserById" resultType="cn.bngel.bngelbookuserprovider8001.bean.User">
+        select * from bngel_user where id = #{id}
+    </select>
+
+    <select id="login" resultType="cn.bngel.bngelbookuserprovider8001.bean.User">
+        select * from bngel_user where (phone = #{account} or email = #{account}) and password = #{password}
+    </select>
+
+    <update id="updateUserById">
+        update bngel_user
+        <set>
+            <if test="username != null">username=#{user.username},</if>
+            <if test="password != null">password=#{user.password},</if>
+            <if test="phone != null">phone=#{user.phone},</if>
+            <if test="email != null">email=#{user.email},</if>
+            <if test="gender != null">gender=#{user.gender},</if>
+            <if test="email != null">birthday=#{user.birthday},</if>
+            <if test="profile != null">profile=#{user.profile}</if>
+        </set>
+        where id = #{user.id}
+    </update>
+</mapper>

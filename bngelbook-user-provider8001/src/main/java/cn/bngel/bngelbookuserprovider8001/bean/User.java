@@ -1,6 +1,5 @@
 package cn.bngel.bngelbookuserprovider8001.bean;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,6 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@TableName("bngel_user")
 public class User {
     public static Integer MAX_LENGTH_OF_USERNAME = 15;
     public static Integer OVER_LENGTH_ERROR_CODE = 410;
