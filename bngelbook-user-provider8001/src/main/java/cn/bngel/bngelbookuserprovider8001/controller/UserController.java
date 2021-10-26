@@ -24,7 +24,7 @@ public class UserController {
         user.setRegisterDate(new Date(new java.util.Date().getTime()));
         Integer result = userService.saveUser(user);
         if (result == 1) {
-            log.info("创建用户: [" + user + "]");
+            log.info("创建用户: [" + user + "] 成功");
             return CommonResult.commonSuccessResult();
         } else {
             log.info("创建用户: [" + user + "] 失败");
@@ -66,11 +66,11 @@ public class UserController {
     public CommonResult getUserById(@RequestParam("id") Long id) {
         User user = userService.getUserById(id);
         if (user != null) {
-            log.info("查询用户: [" + user + "]");
+            log.info("查询用户: [" + user + "] 成功");
             return new CommonResult(CommonResult.SUCCESS_CODE, user, CommonResult.SUCCESS_MESSAGE);
         }
         else {
-            log.info("查询用户[" + id + "]: 失败");
+            log.info("查询用户: [" + id + "]: 失败");
             return new CommonResult(CommonResult.FAILURE_CODE, User.UNKNOWN_USER_MESSAGE);
         }
     }
@@ -85,7 +85,7 @@ public class UserController {
             return new CommonResult(CommonResult.SUCCESS_CODE, user, CommonResult.SUCCESS_MESSAGE);
         }
         else {
-            log.info("登录失败[" + account + "]: 失败");
+            log.info("登录失败: [" + account + "]");
             return new CommonResult(CommonResult.SUCCESS_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }
