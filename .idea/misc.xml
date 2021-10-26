@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-user-provider8001/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-common-api/pom.xml" />
+        <option value="$PROJECT_DIR$/bngelbook-book-provider8002/pom.xml" />
+        <option value="$PROJECT_DIR$/bngelbook-account-provider8003/pom.xml" />
       </list>
     </option>
   </component>

@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "User - 创建用户")
-    @PostMapping("/user/save")
+    @PostMapping("/user")
     public CommonResult saveUser(@RequestBody User user) {
         user.setRegisterDate(new Date(new java.util.Date().getTime()));
         Integer result = userService.saveUser(user);
@@ -34,9 +34,9 @@ public class UserController {
 
     @ApiOperation(value = "User - 注销用户")
     @DeleteMapping("/user")
-    public CommonResult deleteUser(@RequestParam("id") Long id) {
+    public CommonResult deleteUserById(@RequestParam("id") Long id) {
         Integer result = userService.deleteUserById(id);
-        if (result == 1) {
+        if (result >= 1) {
             log.info("删除用户: [" + id + "]");
             return CommonResult.commonSuccessResult();
         } else {
@@ -52,7 +52,7 @@ public class UserController {
             return new CommonResult(User.OVER_LENGTH_ERROR_CODE, User.OVER_LENGTH_ERROR_MESSAGE);
         }
         Integer result = userService.updateUserById(user);
-        if (result == 1) {
+        if (result >= 1) {
             log.info("更改用户信息[" + user.getId() + "]: " + user.getUsername());
             return CommonResult.commonSuccessResult();
         } else {
