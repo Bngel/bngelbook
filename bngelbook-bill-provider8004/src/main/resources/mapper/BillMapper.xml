@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.bngelbookbillprovider8004.dao.BillDao">
+
+    <insert id="saveBill">
+        insert into bngel_bill(`type`,`balance`,`account_id`,`book_id`,`tags`,`create_time`,`io`)
+        values (#{bill.type}, #{bill.balance}, #{bill.accountId}, #{bill.bookId}, #{bill.tags}, now(), #{bill.io});
+    </insert>
+
+    <delete id="deleteBillById">
+        delete from bngel_bill where `id`=#{id};
+    </delete>
+
+    <update id="updateBillById">
+        update bngel_bill
+        <set>
+            <if test="bill.type!=null">`type`=#{bill.type}</if>
+            <if test="bill.balance!=null">`balance`=#{bill.balance}</if>
+            <if test="bill.tags!=null">`tags`=#{bill.tags}</if>
+            <if test="bill.io!=null">`tags`=#{bill.io}</if>
+        </set>
+        where `id`=#{bill.id};
+    </update>
+    
+    <select id="getBillById" resultType="cn.bngel.bngelbookbillprovider8004.bean.Bill">
+        select * from bngel_bill where `id`=#{id};
+    </select>
+
+    <select id="getBillsByBookId" resultType="cn.bngel.bngelbookbillprovider8004.bean.Bill">
+        select * from bngel_bill where `book_id`=#{bookId};
+    </select>
+
+    <select id="getBillsByAccountId" resultType="cn.bngel.bngelbookbillprovider8004.bean.Bill">
+        select * from bngel_bill where `account_id`=#{accountId};
+    </select>
+
+</mapper>

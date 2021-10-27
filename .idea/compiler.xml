@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bngelbook-account-provider8003" />
+        <module name="bngelbook-bill-provider8004" />
         <module name="bngelbook-common-api" />
         <module name="bngelbook-user-provider8001" />
         <module name="bngelbook-book-provider8002" />
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bngelbook-account-provider8003" options="" />
+      <module name="bngelbook-bill-provider8004" options="" />
       <module name="bngelbook-book-provider8002" options="" />
       <module name="bngelbook-common-api" options="" />
       <module name="bngelbook-user-provider8001" options="" />

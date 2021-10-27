@@ -37,7 +37,7 @@ public class AccountController {
     @DeleteMapping("/account")
     public CommonResult deleteAccountById(@RequestParam("id") Long id) {
         Integer result = accountService.deleteAccount(id);
-        if (result >= 1) {
+        if (result == 1) {
             log.info("删除账户: [" + id + "] 成功");
             return CommonResult.commonSuccessResult();
         }
@@ -51,7 +51,7 @@ public class AccountController {
     @PutMapping("/account")
     public CommonResult updateAccountById(@RequestBody Account account) {
         Integer result = accountService.updateAccountById(account);
-        if (result >= 1) {
+        if (result == 1) {
             log.info("修改账户: [" + account + "] 成功");
             return CommonResult.commonSuccessResult();
         }

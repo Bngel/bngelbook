@@ -36,7 +36,7 @@ public class UserController {
     @DeleteMapping("/user")
     public CommonResult deleteUserById(@RequestParam("id") Long id) {
         Integer result = userService.deleteUserById(id);
-        if (result >= 1) {
+        if (result == 1) {
             log.info("删除用户: [" + id + "]");
             return CommonResult.commonSuccessResult();
         } else {
@@ -52,7 +52,7 @@ public class UserController {
             return new CommonResult(User.OVER_LENGTH_ERROR_CODE, User.OVER_LENGTH_ERROR_MESSAGE);
         }
         Integer result = userService.updateUserById(user);
-        if (result >= 1) {
+        if (result == 1) {
             log.info("更改用户信息[" + user.getId() + "]: " + user.getUsername());
             return CommonResult.commonSuccessResult();
         } else {
