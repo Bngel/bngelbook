@@ -50,6 +50,10 @@ public class AccountController {
     @ApiOperation(value = "Account - 修改账户信息")
     @PutMapping("/account")
     public CommonResult updateAccountById(@RequestBody Account account) {
+        if (account.getId() == null) {
+            log.info("修改账户: [" + account + "] 失败");
+            return new CommonResult(CommonResult.NULL_ID_ERROR_CODE, CommonResult.NULL_ID_ERROR_MESSAGE);
+        }
         Integer result = accountService.updateAccountById(account);
         if (result == 1) {
             log.info("修改账户: [" + account + "] 成功");
@@ -71,7 +75,7 @@ public class AccountController {
         }
         else {
             log.info("查询账户: [" + id + "] 失败");
-            return new CommonResult(CommonResult.FAILURE_CODE, Account.UNKNOWN_MESSAGE);
+            return new CommonResult(CommonResult.FAILURE_CODE, CommonResult.UNKNOWN_MESSAGE);
         }
     }
 

@@ -50,6 +50,10 @@ public class BookController {
     @PutMapping("/book")
     @ApiOperation(value = "Book - 修改账本信息")
     public CommonResult updateBookById(@RequestBody Book book) {
+        if (book.getId() == null) {
+            log.info("修改账本: [" + book + "] 失败");
+            return new CommonResult(CommonResult.NULL_ID_ERROR_CODE, CommonResult.NULL_ID_ERROR_MESSAGE);
+        }
         Integer result = bookService.updateBookById(book);
         if (result == 1) {
             log.info("修改账本: [" + book + "] 成功");

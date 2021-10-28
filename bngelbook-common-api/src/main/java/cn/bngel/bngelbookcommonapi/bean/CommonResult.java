@@ -18,6 +18,10 @@ public class CommonResult<T> {
     public static String SUCCESS_MESSAGE = "success";
     public static String FAILURE_MESSAGE = "failed";
 
+    public static final String UNKNOWN_MESSAGE = "查询账户不存在";
+    public static final String NULL_ID_ERROR_MESSAGE = "ID为空, 请确认输入信息是否正确";
+    public static final Integer NULL_ID_ERROR_CODE = 413;
+
     @ApiModelProperty(value = "响应状态码 默认状态(成功: 200, 失败: 400)", name = "code")
     private Integer code;
     @ApiModelProperty(value = "响应数据", name = "data")

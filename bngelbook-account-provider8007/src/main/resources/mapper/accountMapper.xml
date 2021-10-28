@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bngel.bngelbookaccountprovider8007.dao.AccountDao">
+
+    <insert id="saveAccount">
+        insert into bngel_account(name, user_id, balance) values (#{account.name}, #{account.userId}, #{account.balance});
+    </insert>
+
+    <delete id="deleteAccount">
+        delete from bngel_account where id = #{id};
+    </delete>
+
+    <select id="getAccountById" resultType="cn.bngel.bngelbookaccountprovider8007.bean.Account">
+        select * from bngel_account where id = #{id};
+    </select>
+
+    <update id="updateAccountById">
+        update bngel_account
+        <set>
+            <if test="account.name != null">`name`=#{account.name},</if>
+            <if test="account.userId != null">`user_id`=#{account.userId},</if>
+            <if test="account.balance != null">`balance`=#{account.balance}</if>
+        </set>
+        where `id` = #{account.id};
+    </update>
+
+    <select id="getAccountsByUserId" resultType="cn.bngel.bngelbookaccountprovider8007.bean.Account">
+        select * from bngel_account where user_id = #{userId};
+    </select>
+</mapper>

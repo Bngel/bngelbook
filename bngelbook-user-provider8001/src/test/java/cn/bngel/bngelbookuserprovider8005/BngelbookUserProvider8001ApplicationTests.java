@@ -1,4 +1,4 @@
-package cn.bngel.bngelbookuserprovider8001;
+package cn.bngel.bngelbookuserprovider8005;
 
 import cn.bngel.bngelbookuserprovider8001.bean.User;
 import cn.bngel.bngelbookuserprovider8001.controller.UserController;

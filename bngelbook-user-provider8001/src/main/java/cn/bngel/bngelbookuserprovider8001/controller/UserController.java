@@ -48,6 +48,10 @@ public class UserController {
     @ApiOperation(value = "User - 修改用户信息")
     @PutMapping("/user")
     public CommonResult updateUserById(@RequestBody User user) {
+        if (user.getId() == null) {
+            log.info("更改用户信息: [" + user + "] 失败");
+            return new CommonResult(CommonResult.NULL_ID_ERROR_CODE, CommonResult.NULL_ID_ERROR_MESSAGE);
+        }
         if (user.getUsername().length() > User.MAX_LENGTH_OF_USERNAME) {
             return new CommonResult(User.OVER_LENGTH_ERROR_CODE, User.OVER_LENGTH_ERROR_MESSAGE);
         }

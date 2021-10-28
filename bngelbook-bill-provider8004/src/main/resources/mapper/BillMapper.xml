@@ -4,7 +4,9 @@
 
     <insert id="saveBill">
         insert into bngel_bill(`type`,`balance`,`account_id`,`book_id`,`tags`,`create_time`,`io`)
-        values (#{bill.type}, #{bill.balance}, #{bill.accountId}, #{bill.bookId}, #{bill.tags}, now(), #{bill.io});
+        values (#{bill.type}, #{bill.balance}, #{bill.accountId}, #{bill.bookId}, #{bill.tags},
+        <if test="bill.createTime == null">now()</if>
+        <if test="bill.createTime != null">#{bill.createTime}</if>, #{bill.io});
     </insert>
 
     <delete id="deleteBillById">

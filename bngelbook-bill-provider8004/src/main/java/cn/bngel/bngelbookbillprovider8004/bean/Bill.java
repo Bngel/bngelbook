@@ -13,6 +13,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @ToString
 public class Bill {
+
     @ApiModelProperty(value = "账单id", name = "id", required = true)
     private Long id;
     @ApiModelProperty(value = "账单类型", name = "type", required = true)
