@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookaccountprovider8003.service;
 
-import cn.bngel.bngelbookaccountprovider8003.bean.Account;
+import cn.bngel.bngelbookcommonapi.bean.Account;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

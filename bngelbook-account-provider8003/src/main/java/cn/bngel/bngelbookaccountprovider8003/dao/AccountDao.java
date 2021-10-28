@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookaccountprovider8003.dao;
 
-import cn.bngel.bngelbookaccountprovider8003.bean.Account;
+import cn.bngel.bngelbookcommonapi.bean.Account;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

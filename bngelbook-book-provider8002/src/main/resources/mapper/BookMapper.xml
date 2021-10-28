@@ -19,11 +19,11 @@
         where `id`=#{book.id};
     </update>
 
-    <select id="getBookById" resultType="cn.bngel.bngelbookbookprovider8002.bean.Book">
+    <select id="getBookById" resultType="cn.bngel.bngelbookcommonapi.bean.Book">
         select * from bngel_book where `id`=#{id};
     </select>
 
-    <select id="getBooksByUserId" resultType="cn.bngel.bngelbookbookprovider8002.bean.Book">
+    <select id="getBooksByUserId" resultType="cn.bngel.bngelbookcommonapi.bean.Book">
         select * from bngel_book where `user_id`=#{userId};
     </select>
 </mapper>

@@ -1,7 +1,7 @@
 package cn.bngel.bngelbookuserprovider8005.controller;
 
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
-import cn.bngel.bngelbookuserprovider8005.bean.User;
+import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8005.service.UserService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;

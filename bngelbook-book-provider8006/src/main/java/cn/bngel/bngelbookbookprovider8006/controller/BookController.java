@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbookprovider8006.controller;
 
-import cn.bngel.bngelbookbookprovider8006.bean.Book;
+import cn.bngel.bngelbookcommonapi.bean.Book;
 import cn.bngel.bngelbookbookprovider8006.service.BookService;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import io.swagger.annotations.Api;

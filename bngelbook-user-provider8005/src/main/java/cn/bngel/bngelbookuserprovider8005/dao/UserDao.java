@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookuserprovider8005.dao;
 
-import cn.bngel.bngelbookuserprovider8005.bean.User;
+import cn.bngel.bngelbookcommonapi.bean.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper

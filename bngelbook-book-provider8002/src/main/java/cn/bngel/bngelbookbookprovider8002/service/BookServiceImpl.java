@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbookprovider8002.service;
 
-import cn.bngel.bngelbookbookprovider8002.bean.Book;
+import cn.bngel.bngelbookcommonapi.bean.Book;
 import cn.bngel.bngelbookbookprovider8002.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookaccountprovider8007.service;
 
-import cn.bngel.bngelbookaccountprovider8007.bean.Account;
+import cn.bngel.bngelbookcommonapi.bean.Account;
 
 import java.util.List;
 

@@ -16,3 +16,7 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yaml
+
+feign:
+  httpclient:
+    connection-timeout: 4000

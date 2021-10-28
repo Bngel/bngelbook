@@ -14,11 +14,11 @@
         delete from bngel_user where id = #{id};
     </delete>
 
-    <select id="getUserById" resultType="cn.bngel.bngelbookuserprovider8005.bean.User">
+    <select id="getUserById" resultType="cn.bngel.bngelbookcommonapi.bean.User">
         select * from bngel_user where id = #{id};
     </select>
 
-    <select id="login" resultType="cn.bngel.bngelbookuserprovider8005.bean.User">
+    <select id="login" resultType="cn.bngel.bngelbookcommonapi.bean.User">
         select * from bngel_user where (phone = #{account} or email = #{account}) and password = #{password};
     </select>
 

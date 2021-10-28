@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookuserprovider8005.service;
 
-import cn.bngel.bngelbookuserprovider8005.bean.User;
+import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8005.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

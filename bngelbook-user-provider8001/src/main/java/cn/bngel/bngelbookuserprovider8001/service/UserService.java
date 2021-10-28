@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookuserprovider8001.service;
 
-import cn.bngel.bngelbookuserprovider8001.bean.User;
+import cn.bngel.bngelbookcommonapi.bean.User;
 
 public interface UserService{
 

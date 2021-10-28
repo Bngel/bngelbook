@@ -22,15 +22,15 @@
         where `id`=#{bill.id};
     </update>
     
-    <select id="getBillById" resultType="cn.bngel.bngelbookbillprovider8008.bean.Bill">
+    <select id="getBillById" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
         select * from bngel_bill where `id`=#{id};
     </select>
 
-    <select id="getBillsByBookId" resultType="cn.bngel.bngelbookbillprovider8008.bean.Bill">
+    <select id="getBillsByBookId" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
         select * from bngel_bill where `book_id`=#{bookId};
     </select>
 
-    <select id="getBillsByAccountId" resultType="cn.bngel.bngelbookbillprovider8008.bean.Bill">
+    <select id="getBillsByAccountId" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
         select * from bngel_bill where `account_id`=#{accountId};
     </select>
 

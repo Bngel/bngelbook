@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbookprovider8006.service;
 
-import cn.bngel.bngelbookbookprovider8006.bean.Book;
+import cn.bngel.bngelbookcommonapi.bean.Book;
 
 import java.util.List;
 

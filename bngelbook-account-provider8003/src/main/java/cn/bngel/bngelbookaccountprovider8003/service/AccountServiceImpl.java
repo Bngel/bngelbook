@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookaccountprovider8003.service;
 
-import cn.bngel.bngelbookaccountprovider8003.bean.Account;
+import cn.bngel.bngelbookcommonapi.bean.Account;
 import cn.bngel.bngelbookaccountprovider8003.dao.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

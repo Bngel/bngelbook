@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbillprovider8004.dao;
 
-import cn.bngel.bngelbookbillprovider8004.bean.Bill;
+import cn.bngel.bngelbookcommonapi.bean.Bill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,8 @@
 package cn.bngel.bngelbookbillprovider8004.controller;
 
-import cn.bngel.bngelbookbillprovider8004.bean.Bill;
+
 import cn.bngel.bngelbookbillprovider8004.service.BillService;
+import cn.bngel.bngelbookcommonapi.bean.Bill;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -75,7 +76,7 @@ public class BillController {
     public CommonResult getBillsByBookId(@PathVariable("bookId") Long bookId) {
         List<Bill> results = billService.getBillsByBookId(bookId);
         if (results != null) {
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.FAILURE_MESSAGE);
+            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
         }
         else {
             return CommonResult.commonFailureResult();

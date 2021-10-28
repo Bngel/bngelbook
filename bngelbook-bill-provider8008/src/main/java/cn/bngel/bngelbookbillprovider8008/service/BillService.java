@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbillprovider8008.service;
 
-import cn.bngel.bngelbookbillprovider8008.bean.Bill;
+import cn.bngel.bngelbookcommonapi.bean.Bill;
 
 import java.util.List;
 

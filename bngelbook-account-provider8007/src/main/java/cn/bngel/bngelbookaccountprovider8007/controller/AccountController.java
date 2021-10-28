@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookaccountprovider8007.controller;
 
-import cn.bngel.bngelbookaccountprovider8007.bean.Account;
+import cn.bngel.bngelbookcommonapi.bean.Account;
 import cn.bngel.bngelbookaccountprovider8007.service.AccountService;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import io.swagger.annotations.Api;

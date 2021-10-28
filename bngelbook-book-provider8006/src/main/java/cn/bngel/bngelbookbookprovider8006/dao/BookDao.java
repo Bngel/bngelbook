@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbookprovider8006.dao;
 
-import cn.bngel.bngelbookbookprovider8006.bean.Book;
+import cn.bngel.bngelbookcommonapi.bean.Book;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

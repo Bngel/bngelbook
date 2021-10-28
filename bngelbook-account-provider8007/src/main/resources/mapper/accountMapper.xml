@@ -10,7 +10,7 @@
         delete from bngel_account where id = #{id};
     </delete>
 
-    <select id="getAccountById" resultType="cn.bngel.bngelbookaccountprovider8007.bean.Account">
+    <select id="getAccountById" resultType="cn.bngel.bngelbookcommonapi.bean.Account">
         select * from bngel_account where id = #{id};
     </select>
 
@@ -24,7 +24,7 @@
         where `id` = #{account.id};
     </update>
 
-    <select id="getAccountsByUserId" resultType="cn.bngel.bngelbookaccountprovider8007.bean.Account">
+    <select id="getAccountsByUserId" resultType="cn.bngel.bngelbookcommonapi.bean.Account">
         select * from bngel_account where user_id = #{userId};
     </select>
 </mapper>

@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbillprovider8004.service;
 
-import cn.bngel.bngelbookbillprovider8004.bean.Bill;
+import cn.bngel.bngelbookcommonapi.bean.Bill;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

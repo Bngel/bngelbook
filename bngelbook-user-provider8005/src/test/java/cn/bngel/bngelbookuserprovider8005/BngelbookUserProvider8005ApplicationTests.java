@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookuserprovider8005;
 
-import cn.bngel.bngelbookuserprovider8005.bean.User;
+import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8005.controller.UserController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

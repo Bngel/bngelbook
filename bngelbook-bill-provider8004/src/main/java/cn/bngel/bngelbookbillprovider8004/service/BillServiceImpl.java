@@ -1,6 +1,6 @@
 package cn.bngel.bngelbookbillprovider8004.service;
 
-import cn.bngel.bngelbookbillprovider8004.bean.Bill;
+import cn.bngel.bngelbookcommonapi.bean.Bill;
 import cn.bngel.bngelbookbillprovider8004.dao.BillDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
