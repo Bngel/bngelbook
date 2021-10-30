@@ -14,18 +14,18 @@ import java.sql.Date;
 public interface UserService {
 
     @PostMapping("/user")
-    CommonResult saveUser(@RequestBody User user);
+    CommonResult<User> saveUser(@RequestBody User user);
 
     @DeleteMapping("/user")
-    CommonResult deleteUserById(@RequestParam("id") Long id);
+    CommonResult<User> deleteUserById(@RequestParam("id") Long id);
 
     @PutMapping("/user")
-    CommonResult updateUserById(@RequestBody User user);
+    CommonResult<User> updateUserById(@RequestBody User user);
 
     @GetMapping("/user")
-    CommonResult getUserById(@RequestParam("id") Long id);
+    CommonResult<User> getUserById(@RequestParam("id") Long id);
 
     @PostMapping("/user/login")
-    CommonResult login(@RequestParam("account") String account,
+    CommonResult<User> login(@RequestParam("account") String account,
                        @RequestParam("password") String password);
 }

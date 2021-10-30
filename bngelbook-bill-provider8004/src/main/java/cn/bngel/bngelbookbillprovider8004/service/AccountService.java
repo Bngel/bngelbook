@@ -1,13 +1,10 @@
-package cn.bngel.bngelbookaccountconsumer9003.service;
+package cn.bngel.bngelbookbillprovider8004.service;
 
 import cn.bngel.bngelbookcommonapi.bean.Account;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Service
 @FeignClient("bngelbook-account-provider")

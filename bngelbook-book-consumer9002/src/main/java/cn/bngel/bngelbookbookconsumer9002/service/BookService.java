@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.*;
 public interface BookService {
 
     @PostMapping("/book")
-    CommonResult saveBook(@RequestBody Book book);
+    CommonResult<Book> saveBook(@RequestBody Book book);
 
     @DeleteMapping("/book")
-    CommonResult deleteBookById(@RequestParam("id") Long id);
+    CommonResult<Book> deleteBookById(@RequestParam("id") Long id);
 
     @PutMapping("/book")
-    CommonResult updateBookById(@RequestBody Book book);
+    CommonResult<Book> updateBookById(@RequestBody Book book);
 
     @GetMapping("/book")
-    CommonResult getBookById(@RequestParam("id") Long id);
+    CommonResult<Book> getBookById(@RequestParam("id") Long id);
 
     @GetMapping("/book/{userId}")
-    CommonResult getBooksByUserId(@PathVariable("userId") Long userId);
+    CommonResult<Book> getBooksByUserId(@PathVariable("userId") Long userId);
 }

@@ -21,3 +21,13 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
+
+seata:
+  tx-service-group: bngel_tx_group
+  enable-auto-data-source-proxy: false
+  service:
+    vgroup-mapping:
+      bngel_tx_group: default
+  client:
+    undo:
+      log-serialization: kryo

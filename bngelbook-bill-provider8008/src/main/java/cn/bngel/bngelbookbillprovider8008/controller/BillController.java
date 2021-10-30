@@ -24,9 +24,11 @@ public class BillController {
     public CommonResult saveBill(@RequestBody Bill bill){
         Integer result = billService.saveBill(bill);
         if (result == 1) {
+            log.info("创建账单: [" + bill + "] 成功");
             return CommonResult.commonSuccessResult();
         }
         else {
+            log.info("创建账单: [" + bill + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
@@ -36,9 +38,11 @@ public class BillController {
     public CommonResult deleteBillById(@RequestParam("id") Long id) {
         Integer result = billService.deleteBillById(id);
         if (result == 1) {
+            log.info("删除账单: [" + id + "] 成功");
             return CommonResult.commonSuccessResult();
         }
         else {
+            log.info("删除账单: [" + id + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
@@ -51,9 +55,11 @@ public class BillController {
         }
         Integer result = billService.updateBillById(bill);
         if (result == 1) {
+            log.info("更改账单信息: [" + bill + "] 成功");
             return CommonResult.commonSuccessResult();
         }
         else {
+            log.info("更改账单信息: [" + bill + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
@@ -63,9 +69,11 @@ public class BillController {
     public CommonResult getBillById(@RequestParam("id") Long id) {
         Bill result = billService.getBillById(id);
         if (result != null) {
+            log.info("查询账单: [" + id + "] 成功");
             return new CommonResult(CommonResult.SUCCESS_CODE, result, CommonResult.SUCCESS_MESSAGE);
         }
         else {
+            log.info("查询账单: [" + id + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
@@ -75,9 +83,11 @@ public class BillController {
     public CommonResult getBillsByBookId(@PathVariable("bookId") Long bookId) {
         List<Bill> results = billService.getBillsByBookId(bookId);
         if (results != null) {
+            log.info("查询账本账单: [" + bookId + "] 成功");
             return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
         }
         else {
+            log.info("查询账本账单: [" + bookId + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
@@ -87,9 +97,11 @@ public class BillController {
     public CommonResult getBillsByAccountId(@PathVariable("accountId") Long accountId) {
         List<Bill> results = billService.getBillsByAccountId(accountId);
         if (results != null) {
+            log.info("查询账户账单: [" + accountId + "] 成功");
             return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
         }
         else {
+            log.info("查询账户账单: [" + accountId + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }
