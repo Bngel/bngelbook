@@ -37,13 +37,67 @@ public class BillServiceImpl implements BillService{
     }
 
     @Override
+    @GlobalTransactional(name = "bngelbook-bill-delete", rollbackFor = Exception.class)
     public Integer deleteBillById(Long id) {
-        return billDao.deleteBillById(id);
+        Bill bill = billDao.getBillById(id);
+        Integer result = billDao.deleteBillById(id);
+        if (bill != null && bill.getAccountId() != null) {
+            CommonResult<Account> commonResult = accountService.getAccountById(bill.getAccountId());
+            if (commonResult.getCode().equals(CommonResult.SUCCESS_CODE)) {
+                Account account = commonResult.getData();
+                Account newAccount = new Account();
+                newAccount.setId(account.getId());
+                Double newBalance = account.getBalance();
+                if (bill.getIo() == 1) {
+                    newBalance -= bill.getBalance();
+                }
+                else if (bill.getIo() == 0) {
+                    newBalance += bill.getBalance();
+                }
+                newAccount.setBalance(newBalance);
+                accountService.updateAccountById(newAccount);
+            }
+            return result;
+        }
+        else {
+            return -1;
+        }
     }
 
     @Override
+    @GlobalTransactional(name = "bngelbook-bill-update", rollbackFor = Exception.class)
     public Integer updateBillById(Bill bill) {
-        return billDao.updateBillById(bill);
+        Bill originBill = billDao.getBillById(bill.getId());
+        Integer result = billDao.updateBillById(bill);
+        if (originBill.getAccountId() != null) {
+            CommonResult<Account> commonResult = accountService.getAccountById(originBill.getAccountId());
+            Account account = commonResult.getData();
+            Double originBalance = account.getBalance();
+            if (originBill.getIo() == 1) {
+                originBalance -= originBill.getBalance();
+            }
+            else if (originBill.getIo() == 0) {
+                originBalance += originBill.getBalance();
+            }
+            Integer io;
+            if (bill.getIo() != null) {
+                io = bill.getIo();
+            }
+            else {
+                io = originBill.getIo();
+            }
+            if (io == 1) {
+                originBalance += bill.getBalance();
+            }
+            else if (io == 0) {
+                originBalance -= bill.getBalance();
+            }
+            Account newAccount = new Account();
+            newAccount.setId(account.getId());
+            newAccount.setBalance(originBalance);
+            accountService.updateAccountById(newAccount);
+        }
+        return result;
     }
 
     @Override

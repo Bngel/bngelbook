@@ -13,7 +13,7 @@
     <update id="updateBookById">
         update bngel_book
         <set>
-            <if test="book.name != null">`name`=#{book.name}</if>
+            <if test="book.name != null">`name`=#{book.name},</if>
             <if test="book.type != null">`type`=#{book.type}</if>
         </set>
         where `id`=#{book.id};

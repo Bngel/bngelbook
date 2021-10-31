@@ -21,6 +21,7 @@ public class Bill {
     @ApiModelProperty(value = "账单金额", name = "balance", required = true)
     private Double balance;
     @ApiModelProperty(value = "账户id", name = "accountId")
+
     private Long accountId;
     @ApiModelProperty(value = "账本id", name = "bookId", required = true)
     private Long bookId;
