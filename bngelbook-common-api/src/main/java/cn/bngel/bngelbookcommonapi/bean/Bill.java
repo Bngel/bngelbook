@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Bill {
+public class Bill{
 
     @ApiModelProperty(value = "账单id", name = "id", required = true)
     private Long id;
@@ -21,7 +22,6 @@ public class Bill {
     @ApiModelProperty(value = "账单金额", name = "balance", required = true)
     private Double balance;
     @ApiModelProperty(value = "账户id", name = "accountId")
-
     private Long accountId;
     @ApiModelProperty(value = "账本id", name = "bookId", required = true)
     private Long bookId;

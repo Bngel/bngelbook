@@ -14,20 +14,20 @@ import java.util.List;
 public interface BillService {
 
     @PostMapping("/bill")
-    CommonResult<Bill> saveBill(@RequestBody Bill bill);
+    CommonResult<Boolean> saveBill(@RequestBody Bill bill);
 
     @DeleteMapping("/bill")
-    CommonResult<Bill> deleteBillById(@RequestParam("id") Long id);
+    CommonResult<Boolean> deleteBillById(@RequestParam("id") Long id);
 
     @PutMapping("/bill")
-    CommonResult<Bill> updateBillById(@RequestBody Bill bill);
+    CommonResult<Boolean> updateBillById(@RequestBody Bill bill);
 
     @GetMapping("/bill")
     CommonResult<Bill> getBillById(@RequestParam("id") Long id);
 
     @GetMapping("/bill/book/{bookId}")
-    CommonResult<Bill> getBillsByBookId(@PathVariable("bookId") Long bookId);
+    CommonResult<List<Bill>> getBillsByBookId(@PathVariable("bookId") Long bookId);
 
     @GetMapping("/bill/account/{accountId}")
-    CommonResult<Bill> getBillsByAccountId(@PathVariable("accountId") Long accountId);
+    CommonResult<List<Bill>> getBillsByAccountId(@PathVariable("accountId") Long accountId);
 }

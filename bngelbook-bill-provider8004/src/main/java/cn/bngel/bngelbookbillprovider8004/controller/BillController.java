@@ -22,7 +22,7 @@ public class BillController {
 
     @PostMapping("/bill")
     @ApiOperation(value = "Bill - 创建账单")
-    public CommonResult saveBill(@RequestBody Bill bill){
+    public CommonResult<Boolean> saveBill(@RequestBody Bill bill){
         Integer result = billService.saveBill(bill);
         if (result == 1) {
             log.info("创建账单: [" + bill + "] 成功");
@@ -36,7 +36,7 @@ public class BillController {
 
     @DeleteMapping("/bill")
     @ApiOperation(value = "Bill - 删除账单")
-    public CommonResult deleteBillById(@RequestParam("id") Long id) {
+    public CommonResult<Boolean> deleteBillById(@RequestParam("id") Long id) {
         Integer result = billService.deleteBillById(id);
         if (result == 1) {
             log.info("删除账单: [" + id + "] 成功");
@@ -50,7 +50,7 @@ public class BillController {
 
     @PutMapping("/bill")
     @ApiOperation(value = "Bill - 更改账单")
-    public CommonResult updateBillById(@RequestBody Bill bill) {
+    public CommonResult<Boolean> updateBillById(@RequestBody Bill bill) {
         if (bill.getId() == null) {
             return new CommonResult(CommonResult.NULL_ID_ERROR_CODE, CommonResult.NULL_ID_ERROR_MESSAGE);
         }
@@ -67,7 +67,7 @@ public class BillController {
 
     @GetMapping("/bill")
     @ApiOperation(value = "Bill - 查询账单")
-    public CommonResult getBillById(@RequestParam("id") Long id) {
+    public CommonResult<Bill> getBillById(@RequestParam("id") Long id) {
         Bill result = billService.getBillById(id);
         if (result != null) {
             log.info("查询账单: [" + id + "] 成功");
@@ -81,7 +81,7 @@ public class BillController {
 
     @GetMapping("/bill/book/{bookId}")
     @ApiOperation(value = "Bill - 查询账本账单")
-    public CommonResult getBillsByBookId(@PathVariable("bookId") Long bookId) {
+    public CommonResult<List<Bill>> getBillsByBookId(@PathVariable("bookId") Long bookId) {
         List<Bill> results = billService.getBillsByBookId(bookId);
         if (results != null) {
             log.info("查询账本账单: [" + bookId + "] 成功");
@@ -95,7 +95,7 @@ public class BillController {
 
     @GetMapping("/bill/account/{accountId}")
     @ApiOperation(value = "Bill - 查询账户账单")
-    public CommonResult getBillsByAccountId(@PathVariable("accountId") Long accountId) {
+    public CommonResult<List<Bill>> getBillsByAccountId(@PathVariable("accountId") Long accountId) {
         List<Bill> results = billService.getBillsByAccountId(accountId);
         if (results != null) {
             log.info("查询账户账单: [" + accountId + "] 成功");

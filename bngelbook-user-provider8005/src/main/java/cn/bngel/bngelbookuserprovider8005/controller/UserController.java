@@ -90,7 +90,7 @@ public class UserController {
         }
         else {
             log.info("登录失败: [" + account + "]");
-            return new CommonResult(CommonResult.SUCCESS_CODE, User.LOGIN_ERROR_MESSAGE);
+            return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }
 }

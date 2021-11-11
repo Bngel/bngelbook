@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 @Data
@@ -13,6 +14,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @ToString
 public class User {
+
     public static Integer MAX_LENGTH_OF_USERNAME = 15;
     public static Integer OVER_LENGTH_ERROR_CODE = 410;
     public static String OVER_LENGTH_ERROR_MESSAGE = "用户名长度越界";
