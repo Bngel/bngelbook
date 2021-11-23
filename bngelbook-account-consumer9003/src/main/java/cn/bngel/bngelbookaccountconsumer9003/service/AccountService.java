@@ -14,17 +14,17 @@ import java.util.List;
 public interface AccountService {
 
     @PostMapping("/account")
-    CommonResult<Account> saveAccount(@RequestBody Account account);
+    CommonResult<Boolean> saveAccount(@RequestBody Account account);
 
     @DeleteMapping("/account")
-    CommonResult<Account> deleteAccountById(@RequestParam("id") Long id);
+    CommonResult<Boolean> deleteAccountById(@RequestParam("id") Long id);
 
     @PutMapping("/account")
-    CommonResult<Account> updateAccountById(@RequestBody Account account);
+    CommonResult<Boolean> updateAccountById(@RequestBody Account account);
 
     @GetMapping("/account")
     CommonResult<Account> getAccountById(@RequestParam("id") Long id);
 
     @GetMapping("/account/{userId}")
-    CommonResult<Account> getAccountsByUserId(@PathVariable("userId") Long userId);
+    CommonResult<List<Account>> getAccountsByUserId(@PathVariable("userId") Long userId);
 }

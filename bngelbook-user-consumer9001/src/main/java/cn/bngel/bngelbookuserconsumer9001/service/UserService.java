@@ -14,13 +14,13 @@ import java.sql.Date;
 public interface UserService {
 
     @PostMapping("/user")
-    CommonResult<User> saveUser(@RequestBody User user);
+    CommonResult<Boolean> saveUser(@RequestBody User user);
 
     @DeleteMapping("/user")
-    CommonResult<User> deleteUserById(@RequestParam("id") Long id);
+    CommonResult<Boolean> deleteUserById(@RequestParam("id") Long id);
 
     @PutMapping("/user")
-    CommonResult<User> updateUserById(@RequestBody User user);
+    CommonResult<Boolean> updateUserById(@RequestBody User user);
 
     @GetMapping("/user")
     CommonResult<User> getUserById(@RequestParam("id") Long id);

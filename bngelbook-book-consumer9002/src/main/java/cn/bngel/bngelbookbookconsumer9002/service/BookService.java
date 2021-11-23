@@ -8,22 +8,24 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Service
 @FeignClient("bngelbook-book-provider")
 public interface BookService {
 
     @PostMapping("/book")
-    CommonResult<Book> saveBook(@RequestBody Book book);
+    CommonResult<Boolean> saveBook(@RequestBody Book book);
 
     @DeleteMapping("/book")
-    CommonResult<Book> deleteBookById(@RequestParam("id") Long id);
+    CommonResult<Boolean> deleteBookById(@RequestParam("id") Long id);
 
     @PutMapping("/book")
-    CommonResult<Book> updateBookById(@RequestBody Book book);
+    CommonResult<Boolean> updateBookById(@RequestBody Book book);
 
     @GetMapping("/book")
     CommonResult<Book> getBookById(@RequestParam("id") Long id);
 
     @GetMapping("/book/{userId}")
-    CommonResult<Book> getBooksByUserId(@PathVariable("userId") Long userId);
+    CommonResult<List<Book>> getBooksByUserId(@PathVariable("userId") Long userId);
 }

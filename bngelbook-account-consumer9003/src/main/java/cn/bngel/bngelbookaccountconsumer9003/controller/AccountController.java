@@ -3,6 +3,7 @@ package cn.bngel.bngelbookaccountconsumer9003.controller;
 import cn.bngel.bngelbookaccountconsumer9003.service.AccountService;
 import cn.bngel.bngelbookcommonapi.bean.Account;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,8 @@ public class AccountController {
 
     @ApiOperation(value = "Account - 创建账户")
     @PostMapping("/account")
-    public CommonResult saveAccount(@RequestBody Account account) {
-        CommonResult result = accountService.saveAccount(account);
+    public CommonResult<Boolean> saveAccount(@RequestBody Account account) {
+        CommonResult<Boolean> result = accountService.saveAccount(account);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("创建账户: [" + account + "] 成功");
         }
@@ -35,8 +36,8 @@ public class AccountController {
 
     @ApiOperation(value = "Account - 删除账户")
     @DeleteMapping("/account")
-    public CommonResult deleteAccountById(@RequestParam("id") Long id) {
-        CommonResult result = accountService.deleteAccountById(id);
+    public CommonResult<Boolean> deleteAccountById(@RequestParam("id") Long id) {
+        CommonResult<Boolean> result = accountService.deleteAccountById(id);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("删除账户: [" + id + "] 成功");
         }
@@ -48,8 +49,8 @@ public class AccountController {
 
     @ApiOperation(value = "Account - 修改账户信息")
     @PutMapping("/account")
-    public CommonResult updateAccountById(@RequestBody Account account) {
-        CommonResult result = accountService.updateAccountById(account);
+    public CommonResult<Boolean> updateAccountById(@RequestBody Account account) {
+        CommonResult<Boolean> result = accountService.updateAccountById(account);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("更改账户: [" + account + "] 成功");
         }
@@ -61,8 +62,8 @@ public class AccountController {
 
     @ApiOperation(value = "Account - 查询账户")
     @GetMapping("/account")
-    public CommonResult getAccountById(@RequestParam("id") Long id) {
-        CommonResult result = accountService.getAccountById(id);
+    public CommonResult<Account> getAccountById(@RequestParam("id") Long id) {
+        CommonResult<Account> result = accountService.getAccountById(id);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("查询账户: [" + id + "] 成功");
         }
@@ -74,8 +75,8 @@ public class AccountController {
 
     @ApiOperation(value = "Account - 查询用户账户")
     @GetMapping("/account/{userId}")
-    public CommonResult getAccountsByUserId(@PathVariable("userId") Long userId) {
-        CommonResult result = accountService.getAccountsByUserId(userId);
+    public CommonResult<List<Account>> getAccountsByUserId(@PathVariable("userId") Long userId) {
+        CommonResult<List<Account>> result = accountService.getAccountsByUserId(userId);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("查询用户账户: [" + userId + "] 成功");
         }
