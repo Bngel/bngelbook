@@ -13,6 +13,7 @@
         <module name="bngelbook-book-provider8002" />
         <module name="bngelbook-user-consumer9001" />
         <module name="bngelbook-account-provider8007" />
+        <module name="bngelbook-friend-provider8005" />
         <module name="bngelbook-account-consumer9003" />
         <module name="bngelbook-account-provider8003" />
         <module name="bngelbook-bill-consumer9004" />
@@ -32,6 +33,7 @@
       <module name="bngelbook-book-consumer9002" options="" />
       <module name="bngelbook-book-provider8002" options="" />
       <module name="bngelbook-common-api" options="" />
+      <module name="bngelbook-friend-provider8005" options="-parameters" />
       <module name="bngelbook-user-consumer9001" options="" />
       <module name="bngelbook-user-provider8001" options="" />
     </option>
