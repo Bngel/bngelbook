@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.bngelbookfriendprovider8009.dao.FriendDao">
+
+    <insert id="addFriend">
+        insert into bngel_friend (`user1_id`,`user2_id`) values (#{friend.user1Id}, #{friend.user2Id})
+    </insert>
+
+    <delete id="deleteFriendById">
+        delete from bngel_friend where `id` = #{id};
+    </delete>
+
+    <update id="updateFriendById">
+        update bngel_friend
+        <set>
+            <if test="friend.user1Id != null">`user1_id` = #{friend.user1Id},</if>
+            <if test="friend.user2Id != null">`user2_id` = #{friend.user2Id},</if>
+        </set>
+        where `id` = #{friend.id};
+    </update>
+
+    <select id="getFriendById" resultType="cn.bngel.bngelbookcommonapi.bean.Friend">
+        select * from bngel_friend where `id` = #{id};
+    </select>
+
+    <select id="getFriendsByUserId" resultType="cn.bngel.bngelbookcommonapi.bean.Friend">
+        select * from bngel_friend where `user1_id` = #{userId} or `user2_id` = #{userId};
+    </select>
+
+    <delete id="deleteFriendByUserId">
+        delete from bngel_friend where (`user1_id` = #{friend.user1Id} and `user2_id` = #{friend.user2Id})
+                or (`user1_id` = #{friend.user2Id} and `user2_id` = #{friend.user1Id});
+    </delete>
+
+    <select id="judgeFriendExists" resultType="Integer">
+        select COUNT(*) from bngel_friend where (`user1_id` = #{user1Id} and `user2_id` = #{user2Id})
+                or (`user1_id` = #{user2Id} and `user2_id` = #{user1Id});
+    </select>
+
+</mapper>

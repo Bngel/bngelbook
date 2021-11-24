@@ -16,6 +16,7 @@
     <module>bngelbook-account-provider8007</module>
     <module>bngelbook-bill-provider8004</module>
     <module>bngelbook-bill-provider8008</module>
+    <module>bngelbook-friend-provider8009</module>
     <module>bngelbook-user-consumer9001</module>
     <module>bngelbook-book-consumer9002</module>
     <module>bngelbook-account-consumer9003</module>
