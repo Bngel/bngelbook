@@ -21,6 +21,7 @@
     <module>bngelbook-book-consumer9002</module>
     <module>bngelbook-account-consumer9003</module>
     <module>bngelbook-bill-consumer9004</module>
+    <module>bngelbook-friend-consumer9005</module>
     <module>bngelbook-common-api</module>
   </modules>
   <packaging>pom</packaging>
