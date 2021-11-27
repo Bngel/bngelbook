@@ -15,4 +15,6 @@ public interface UserDao {
     User login(@Param("account") String account, @Param("password") String password);
 
     Integer updateUserById(@Param("user") User user);
+
+    Integer getUserRegisterDays(@Param("id") Long id);
 }

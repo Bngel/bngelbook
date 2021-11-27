@@ -80,4 +80,17 @@ public class UserController {
         }
         return result;
     }
+
+    @ApiOperation(value = "User - 用户累计注册时间")
+    @GetMapping("/user/registerDays")
+    public CommonResult<Integer> login(@RequestParam("id") Long id) {
+        CommonResult<Integer> result = userService.getUserRegisterDays(id);
+        if (result != null) {
+            log.info("用户注册时间: [" + result.getData() + "]");
+        }
+        else {
+            log.info("查询失败: [ id:" + id + "]");
+        }
+        return result;
+    }
 }

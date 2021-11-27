@@ -15,4 +15,6 @@ public interface UserService{
     Integer updateUsernameById(Long id, String username);
 
     User login(String account, String password);
+
+    Integer getUserRegisterDays(Long id);
 }

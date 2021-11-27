@@ -22,5 +22,4 @@ class BngelbookUserProvider8005ApplicationTests {
                 "17605024713", "wu330998038@qq.com", null, 1,
                 new Date(new java.util.Date().getTime()), new Date(new java.util.Date().getTime())));
     }
-
 }

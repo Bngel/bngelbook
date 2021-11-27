@@ -28,4 +28,7 @@ public interface UserService {
     @PostMapping("/user/login")
     CommonResult<User> login(@RequestParam("account") String account,
                        @RequestParam("password") String password);
+
+    @GetMapping("/user/registerDays")
+    CommonResult<Integer> getUserRegisterDays(@RequestParam("id") Long id);
 }

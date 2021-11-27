@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Integer getUserRegisterDays(Long id) {
+        return userDao.getUserRegisterDays(id);
+    }
+
+    @Override
     public Integer updateUsernameById(Long id, String username) {
         User user = new User();
         user.setId(id);

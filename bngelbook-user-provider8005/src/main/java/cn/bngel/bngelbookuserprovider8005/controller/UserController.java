@@ -93,4 +93,18 @@ public class UserController {
             return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }
+
+    @ApiOperation(value = "User - 用户累计注册时间")
+    @GetMapping("/user/registerDays")
+    public CommonResult login(@RequestParam("id") Long id) {
+        Integer days = userService.getUserRegisterDays(id);
+        if (days != null) {
+            log.info("用户注册时间: [" + days + "]");
+            return new CommonResult(CommonResult.SUCCESS_CODE, days, CommonResult.SUCCESS_MESSAGE);
+        }
+        else {
+            log.info("查询失败: [ id:" + id + "]");
+            return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
+        }
+    }
 }

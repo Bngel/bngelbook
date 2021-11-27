@@ -35,4 +35,8 @@
         </set>
         where id = #{user.id};
     </update>
+
+    <select id="getUserRegisterDays" resultType="Integer">
+        SELECT DATEDIFF(NOW(), `register_date`) FROM `bngel_user` where `id` = #{id};
+    </select>
 </mapper>
