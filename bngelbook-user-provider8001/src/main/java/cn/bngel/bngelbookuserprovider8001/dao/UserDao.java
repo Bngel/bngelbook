@@ -3,6 +3,8 @@ package cn.bngel.bngelbookuserprovider8001.dao;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserDao {
 
@@ -17,4 +19,6 @@ public interface UserDao {
     Integer updateUserById(@Param("user") User user);
 
     Integer getUserRegisterDays(@Param("id") Long id);
+
+    List<User> getFriendsById(@Param("id") Long id);
 }

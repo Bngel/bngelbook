@@ -41,27 +41,37 @@ public class BillServiceImpl implements BillService{
     public Integer deleteBillById(Long id) {
         Bill bill = billDao.getBillById(id);
         Integer result = billDao.deleteBillById(id);
-        if (bill != null && bill.getAccountId() != null) {
-            CommonResult<Account> commonResult = accountService.getAccountById(bill.getAccountId());
-            if (commonResult.getCode().equals(CommonResult.SUCCESS_CODE)) {
-                Account account = commonResult.getData();
-                Account newAccount = new Account();
-                newAccount.setId(account.getId());
-                Double newBalance = account.getBalance();
-                if (bill.getIo() == 1) {
-                    newBalance -= bill.getBalance();
-                }
-                else if (bill.getIo() == 0) {
-                    newBalance += bill.getBalance();
-                }
-                newAccount.setBalance(newBalance);
-                accountService.updateAccountById(newAccount);
+        if (bill != null) {
+            if (bill.getAccountId() == null){
+                return result;
             }
-            return result;
+            else {
+                CommonResult<Account> commonResult = accountService.getAccountById(bill.getAccountId());
+                if (commonResult.getCode().equals(CommonResult.SUCCESS_CODE)) {
+                    Account account = commonResult.getData();
+                    Account newAccount = new Account();
+                    newAccount.setId(account.getId());
+                    Double newBalance = account.getBalance();
+                    if (bill.getIo() == 1) {
+                        newBalance -= bill.getBalance();
+                    } else if (bill.getIo() == 0) {
+                        newBalance += bill.getBalance();
+                    }
+                    newAccount.setBalance(newBalance);
+                    CommonResult<Account> accountResult = accountService.updateAccountById(newAccount);
+                    if (accountResult.getCode().equals(CommonResult.SUCCESS_CODE)) {
+                        return result;
+                    }
+                    else {
+                        return -1;
+                    }
+                }
+            }
         }
         else {
             return -1;
         }
+        return result;
     }
 
     @Override

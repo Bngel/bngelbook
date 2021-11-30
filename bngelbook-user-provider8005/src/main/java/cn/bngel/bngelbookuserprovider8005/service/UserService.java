@@ -2,6 +2,8 @@ package cn.bngel.bngelbookuserprovider8005.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
 
+import java.util.List;
+
 public interface UserService{
 
     Integer saveUser(User user);
@@ -17,4 +19,6 @@ public interface UserService{
     User login(String account, String password);
 
     Integer getUserRegisterDays(Long id);
+
+    List<User> getFriendsById(Long id);
 }

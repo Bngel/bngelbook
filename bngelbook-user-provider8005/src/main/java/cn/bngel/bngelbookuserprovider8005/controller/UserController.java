@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -96,7 +97,7 @@ public class UserController {
 
     @ApiOperation(value = "User - 用户累计注册时间")
     @GetMapping("/user/registerDays")
-    public CommonResult login(@RequestParam("id") Long id) {
+    public CommonResult getUserRegisterDays(@RequestParam("id") Long id) {
         Integer days = userService.getUserRegisterDays(id);
         if (days != null) {
             log.info("用户注册时间: [" + days + "]");
@@ -104,6 +105,20 @@ public class UserController {
         }
         else {
             log.info("查询失败: [ id:" + id + "]");
+            return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
+        }
+    }
+
+    @ApiOperation(value = "User - 获取好友列表")
+    @GetMapping("/user/friends")
+    public CommonResult getFriendsById(@RequestParam("id") Long id) {
+        List<User> friends = userService.getFriendsById(id);
+        if (friends != null) {
+            log.info("用户好友列表: [" + id + "] 获取成功");
+            return new CommonResult(CommonResult.SUCCESS_CODE, friends, CommonResult.SUCCESS_MESSAGE);
+        }
+        else {
+            log.info("用户好友列表: [" + id + "] 获取失败");
             return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }

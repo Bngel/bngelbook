@@ -29,11 +29,11 @@
     </select>
 
     <select id="getBillsByBookId" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
-        select * from bngel_bill where `book_id`=#{bookId};
+        select * from bngel_bill where `book_id`=#{bookId} order by `create_time` desc;
     </select>
 
     <select id="getBillsByAccountId" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
-        select * from bngel_bill where `account_id`=#{accountId};
+        select * from bngel_bill where `account_id`=#{accountId} order by `create_time` desc;
     </select>
 
 </mapper>

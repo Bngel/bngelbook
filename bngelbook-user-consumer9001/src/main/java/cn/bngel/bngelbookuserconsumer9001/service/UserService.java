@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @FeignClient("bngelbook-user-provider")
 @Service
@@ -31,4 +32,7 @@ public interface UserService {
 
     @GetMapping("/user/registerDays")
     CommonResult<Integer> getUserRegisterDays(@RequestParam("id") Long id);
+
+    @GetMapping("/user/friends")
+    CommonResult<List<User>> getFriendsById(@RequestParam("id") Long id);
 }

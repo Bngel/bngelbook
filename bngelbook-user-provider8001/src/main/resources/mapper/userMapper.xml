@@ -39,4 +39,12 @@
     <select id="getUserRegisterDays" resultType="Integer">
         SELECT DATEDIFF(NOW(), `register_date`) FROM `bngel_user` where `id` = #{id};
     </select>
+
+    <select id="getFriendsById" resultType="cn.bngel.bngelbookcommonapi.bean.User">
+        SELECT * FROM `bngel_user` where id in (
+            SELECT `user1_id` `friend_id` from `bngel_friend` where `user2_id` = #{id}
+            UNION
+            SELECT `user2_id` `friend_id` from `bngel_friend` where `user1_id` = #{id}
+        );
+    </select>
 </mapper>

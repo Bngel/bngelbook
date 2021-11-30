@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @Api(tags = "用户模块")
@@ -92,5 +94,18 @@ public class UserController {
             log.info("查询失败: [ id:" + id + "]");
         }
         return result;
+    }
+
+    @ApiOperation(value = "User - 获取好友列表")
+    @GetMapping("/user/friends")
+    public CommonResult<List<User>> getFriendsById(@RequestParam("id") Long id) {
+        CommonResult<List<User>> results = userService.getFriendsById(id);
+        if (results != null) {
+            log.info("用户好友列表: [" + id + "] 获取成功");
+        }
+        else {
+            log.info("用户好友列表: [" + id + "] 获取失败");
+        }
+        return results;
     }
 }

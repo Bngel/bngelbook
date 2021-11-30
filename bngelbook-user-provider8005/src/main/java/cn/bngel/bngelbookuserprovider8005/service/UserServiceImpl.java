@@ -5,6 +5,8 @@ import cn.bngel.bngelbookuserprovider8005.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -42,6 +44,11 @@ public class UserServiceImpl implements UserService{
         user.setId(id);
         user.setUsername(username);
         return userDao.updateUserById(user);
+    }
+
+    @Override
+    public List<User> getFriendsById(Long id) {
+        return userDao.getFriendsById(id);
     }
 
     @Override

@@ -5,6 +5,8 @@ import cn.bngel.bngelbookuserprovider8001.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -39,6 +41,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Integer getUserRegisterDays(Long id) {
         return userDao.getUserRegisterDays(id);
+    }
+
+    @Override
+    public List<User> getFriendsById(Long id) {
+        return userDao.getFriendsById(id);
     }
 
     @Override
