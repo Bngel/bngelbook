@@ -21,4 +21,6 @@ public interface UserDao {
     Integer getUserRegisterDays(@Param("id") Long id);
 
     List<User> getFriendsById(@Param("id") Long id);
+
+    List<User> getUsersByUsername(@Param("username") String username);
 }

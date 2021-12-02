@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<User> getUsersByUsername(String username) {
+        return userDao.getUsersByUsername(username);
+    }
+
+    @Override
     public List<User> getFriendsById(Long id) {
         return userDao.getFriendsById(id);
     }

@@ -21,4 +21,6 @@ public interface UserService{
     Integer getUserRegisterDays(Long id);
 
     List<User> getFriendsById(Long id);
+
+    List<User> getUsersByUsername(String username);
 }

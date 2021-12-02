@@ -47,4 +47,8 @@
             SELECT `user2_id` `friend_id` from `bngel_friend` where `user1_id` = #{id}
         );
     </select>
+
+    <select id="getUsersByUsername" resultType="cn.bngel.bngelbookcommonapi.bean.User">
+        select * from `bngel_user` where `username` like CONCAT('%',#{username},'%');
+    </select>
 </mapper>

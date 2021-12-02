@@ -35,4 +35,7 @@ public interface UserService {
 
     @GetMapping("/user/friends")
     CommonResult<List<User>> getFriendsById(@RequestParam("id") Long id);
+
+    @GetMapping("/user/{username}")
+    CommonResult<List<User>> getUsersByUsername(@PathVariable("username") String username);
 }

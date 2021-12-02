@@ -1,6 +1,7 @@
 package cn.bngel.bngelbookuserprovider8001.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface UserService{
     Integer getUserRegisterDays(Long id);
 
     List<User> getFriendsById(Long id);
+
+    List<User> getUsersByUsername(String username);
 }

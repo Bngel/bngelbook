@@ -122,4 +122,18 @@ public class UserController {
             return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }
+
+    @ApiOperation(value = "User - 查询用户列表 by 用户名")
+    @GetMapping("/user/{username}")
+    public CommonResult getUsersByUsername(@PathVariable("username") String username) {
+        List<User> users = userService.getUsersByUsername(username);
+        if (users != null) {
+            log.info("用户列表: [" + username + "] 获取成功");
+            return new CommonResult(CommonResult.SUCCESS_CODE, users, CommonResult.SUCCESS_MESSAGE);
+        }
+        else {
+            log.info("用户列表: [" + username + "] 获取失败");
+            return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
+        }
+    }
 }

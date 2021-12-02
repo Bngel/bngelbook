@@ -108,4 +108,17 @@ public class UserController {
         }
         return results;
     }
+
+    @ApiOperation(value = "User - 查询用户列表 By 用户名")
+    @GetMapping("/user/{username}")
+    public CommonResult<List<User>> getUsersByUsername(@PathVariable("username") String username) {
+        CommonResult<List<User>> results = userService.getUsersByUsername(username);
+        if (results != null) {
+            log.info("用户列表: [" + username + "] 获取成功");
+        }
+        else {
+            log.info("用户列表: [" + username + "] 获取失败");
+        }
+        return results;
+    }
 }

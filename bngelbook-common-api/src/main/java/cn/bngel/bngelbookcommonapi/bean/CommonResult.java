@@ -43,4 +43,5 @@ public class CommonResult<T> {
     public static CommonResult commonFailureResult() {
         return new CommonResult(FAILURE_CODE, FAILURE_MESSAGE);
     }
+
 }
