@@ -40,7 +40,7 @@ public class UserController {
         if (result == 1) {
             log.info("注册用户: [" + user + "] 成功");
             return CommonResult.commonSuccessResult();
-        } else if (result == 0){
+        } else if (result == -1){
             log.info("注册用户: [" + user + "] 失败: 用户已存在");
             return new CommonResult(User.USER_REGISTERED_ERROR_CODE, User.USER_REGISTERED_ERROR_MESSAGE);
         } else {

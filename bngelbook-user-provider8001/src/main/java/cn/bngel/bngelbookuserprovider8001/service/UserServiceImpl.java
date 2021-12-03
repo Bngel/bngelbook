@@ -61,12 +61,12 @@ public class UserServiceImpl implements UserService{
         else if (type == 1)
             userExists = userDao.judgeUserExists(user.getEmail());
         else
-            userExists = -1;
+            userExists = -2;
         if (userExists == 0) {
             return userDao.saveUser(user);
         }
         else {
-            return userExists;
+            return -1;
         }
     }
 
