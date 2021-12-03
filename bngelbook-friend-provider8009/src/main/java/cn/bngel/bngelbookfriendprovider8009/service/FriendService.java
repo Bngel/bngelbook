@@ -10,7 +10,7 @@ public interface FriendService {
 
     Integer deleteFriendById(Long id);
 
-    Integer deleteFriendByUserId(Friend friend);
+    Integer deleteFriendByFriend(Friend friend);
 
     Integer updateFriendById(Friend friend);
 

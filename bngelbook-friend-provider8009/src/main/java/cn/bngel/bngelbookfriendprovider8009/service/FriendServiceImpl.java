@@ -32,8 +32,8 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
-    public Integer deleteFriendByUserId(Friend friend) {
-        return friendDao.deleteFriendByUserId(friend);
+    public Integer deleteFriendByFriend(Friend friend) {
+        return friendDao.deleteFriendByFriend(friend);
     }
 
     @Override

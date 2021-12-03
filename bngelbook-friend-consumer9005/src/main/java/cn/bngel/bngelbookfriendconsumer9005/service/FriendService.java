@@ -20,7 +20,7 @@ public interface FriendService {
     CommonResult<Boolean> deleteFriendById(@RequestParam("id") Long id);
 
     @DeleteMapping("/friend")
-    CommonResult<Boolean> deleteFriendByUserId(@RequestParam("friend") Friend friend);
+    CommonResult<Boolean> deleteFriendByFriend(@RequestBody Friend friend);
 
     @PutMapping("/friend")
     CommonResult<Boolean> updateFriendById(@RequestBody Friend friend);

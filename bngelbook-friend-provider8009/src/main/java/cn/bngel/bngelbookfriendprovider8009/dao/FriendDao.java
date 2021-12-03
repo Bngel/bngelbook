@@ -19,7 +19,7 @@ public interface FriendDao {
 
     List<Friend> getFriendsByUserId(@Param("userId") Long userId);
 
-    Integer deleteFriendByUserId(@Param("friend") Friend friend);
+    Integer deleteFriendByFriend(@Param("friend") Friend friend);
 
     Integer judgeFriendExists(@Param("user1Id") Long user1Id, @Param("user2Id") Long user2Id);
 }

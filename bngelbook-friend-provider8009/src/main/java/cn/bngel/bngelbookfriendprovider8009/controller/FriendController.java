@@ -65,8 +65,8 @@ public class FriendController {
 
     @DeleteMapping("/friend")
     @ApiOperation(value = "Friend - 删除好友 by 用户ID")
-    public CommonResult deleteFriendByUserId(@RequestParam("friend") Friend friend) {
-        Integer result = friendService.deleteFriendByUserId(friend);
+    public CommonResult deleteFriendByFriend(@RequestBody Friend friend) {
+        Integer result = friendService.deleteFriendByFriend(friend);
         if (result == 1) {
             log.info("删除好友关系: [" + friend + "] 成功");
             return CommonResult.commonSuccessResult();

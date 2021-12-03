@@ -27,7 +27,7 @@
         select * from bngel_friend where `user1_id` = #{userId} or `user2_id` = #{userId};
     </select>
 
-    <delete id="deleteFriendByUserId">
+    <delete id="deleteFriendByFriend">
         delete from bngel_friend where (`user1_id` = #{friend.user1Id} and `user2_id` = #{friend.user2Id})
                 or (`user1_id` = #{friend.user2Id} and `user2_id` = #{friend.user1Id});
     </delete>
