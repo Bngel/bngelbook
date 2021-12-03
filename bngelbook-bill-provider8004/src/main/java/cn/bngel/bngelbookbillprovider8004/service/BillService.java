@@ -18,4 +18,6 @@ public interface BillService {
     List<Bill> getBillsByBookId(Long bookId);
 
     List<Bill> getBillsByAccountId(Long accountId);
+
+    List<Bill> getMonthBillsByBookId(Long bookId, Integer month);
 }

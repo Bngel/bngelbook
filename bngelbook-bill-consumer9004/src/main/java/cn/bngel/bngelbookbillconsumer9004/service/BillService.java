@@ -30,4 +30,8 @@ public interface BillService {
 
     @GetMapping("/bill/account/{accountId}")
     CommonResult<List<Bill>> getBillsByAccountId(@PathVariable("accountId") Long accountId);
+
+    @GetMapping("/bill/book/{bookId}/{month}")
+    CommonResult<List<Bill>> getMonthBillsByBookId(@PathVariable("bookId") Long bookId,
+                                                          @PathVariable("month") Integer month);
 }

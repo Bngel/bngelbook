@@ -79,6 +79,7 @@ public class BillController {
         }
     }
 
+
     @GetMapping("/bill/book/{bookId}")
     @ApiOperation(value = "Bill - 查询账本账单")
     public CommonResult<List<Bill>> getBillsByBookId(@PathVariable("bookId") Long bookId) {
@@ -89,6 +90,21 @@ public class BillController {
         }
         else {
             log.info("查询账本账单: [" + bookId + "] 失败");
+            return CommonResult.commonFailureResult();
+        }
+    }
+
+    @GetMapping("/bill/book/{bookId}/{month}")
+    @ApiOperation(value = "Bill - 查询账本月账单")
+    public CommonResult<List<Bill>> getMonthBillsByBookId(@PathVariable("bookId") Long bookId,
+                                                          @PathVariable("month") Integer month) {
+        List<Bill> results = billService.getMonthBillsByBookId(bookId,month);
+        if (results != null) {
+            log.info("查询账本" + month +"月账单: [" + bookId + "] 成功");
+            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+        }
+        else {
+            log.info("查询账本" + month +"月账单: [" + bookId + "] 失败");
             return CommonResult.commonFailureResult();
         }
     }

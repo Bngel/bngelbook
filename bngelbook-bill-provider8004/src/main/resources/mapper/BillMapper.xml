@@ -36,4 +36,7 @@
         select * from bngel_bill where `account_id`=#{accountId} order by `create_time` desc;
     </select>
 
+    <select id="getMonthBillsByBookId" resultType="cn.bngel.bngelbookcommonapi.bean.Bill">
+        select * from bngel_bill where month(`create_time`) = #{month} and year(`create_time`) = year(now()) and `book_id` = #{bookId};
+    </select>
 </mapper>

@@ -20,4 +20,6 @@ public interface BillDao {
     List<Bill> getBillsByBookId(@Param("bookId") Long bookId);
 
     List<Bill> getBillsByAccountId(@Param("accountId") Long accountId);
+
+    List<Bill> getMonthBillsByBookId(@Param("bookId") Long bookId, @Param("month") Integer month);
 }

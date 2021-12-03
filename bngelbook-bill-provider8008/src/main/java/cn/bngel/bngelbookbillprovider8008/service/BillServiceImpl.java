@@ -124,4 +124,9 @@ public class BillServiceImpl implements BillService{
     public List<Bill> getBillsByAccountId(Long accountId) {
         return billDao.getBillsByAccountId(accountId);
     }
+
+    @Override
+    public List<Bill> getMonthBillsByBookId(Long bookId, Integer month) {
+        return billDao.getMonthBillsByBookId(bookId, month);
+    }
 }
