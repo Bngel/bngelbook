@@ -60,4 +60,21 @@ public class UserServiceImpl implements UserService{
     public Integer getUserRegisterDays(Long id) {
         return userDao.getUserRegisterDays(id);
     }
+
+    @Override
+    public Integer registerUser(User user, Integer type) {
+        Integer userExists;
+        if (type == 0)
+            userExists = userDao.judgeUserExists(user.getPhone());
+        else if (type == 1)
+            userExists = userDao.judgeUserExists(user.getEmail());
+        else
+            userExists = -1;
+        if (userExists == 0) {
+            return userDao.saveUser(user);
+        }
+        else {
+            return userExists;
+        }
+    }
 }

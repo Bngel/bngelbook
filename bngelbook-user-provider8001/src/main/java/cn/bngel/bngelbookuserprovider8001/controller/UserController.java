@@ -33,6 +33,22 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "User - 注册用户")
+    @PostMapping("/user/register/{type}")
+    public CommonResult registerUser(@RequestBody User user, @PathVariable("type") Integer type) {
+        Integer result = userService.registerUser(user,type);
+        if (result == 1) {
+            log.info("注册用户: [" + user + "] 成功");
+            return CommonResult.commonSuccessResult();
+        } else if (result == 0){
+            log.info("注册用户: [" + user + "] 失败: 用户已存在");
+            return new CommonResult(User.USER_REGISTERED_ERROR_CODE, User.USER_REGISTERED_ERROR_MESSAGE);
+        } else {
+            log.info("注册用户: [" + user + "] 失败");
+            return CommonResult.commonFailureResult();
+        }
+    }
+
     @ApiOperation(value = "User - 注销用户")
     @DeleteMapping("/user")
     public CommonResult deleteUserById(@RequestParam("id") Long id) {

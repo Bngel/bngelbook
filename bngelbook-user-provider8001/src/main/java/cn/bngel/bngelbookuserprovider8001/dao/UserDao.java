@@ -23,4 +23,6 @@ public interface UserDao {
     List<User> getFriendsById(@Param("id") Long id);
 
     List<User> getUsersByUsername(@Param("username") String username);
+
+    Integer judgeUserExists(@Param("user_account") String account);
 }

@@ -54,6 +54,23 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Integer registerUser(User user, Integer type) {
+        Integer userExists;
+        if (type == 0)
+            userExists = userDao.judgeUserExists(user.getPhone());
+        else if (type == 1)
+            userExists = userDao.judgeUserExists(user.getEmail());
+        else
+            userExists = -1;
+        if (userExists == 0) {
+            return userDao.saveUser(user);
+        }
+        else {
+            return userExists;
+        }
+    }
+
+    @Override
     public Integer updateUsernameById(Long id, String username) {
         User user = new User();
         user.setId(id);

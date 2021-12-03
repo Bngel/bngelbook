@@ -51,4 +51,9 @@
     <select id="getUsersByUsername" resultType="cn.bngel.bngelbookcommonapi.bean.User">
         select * from `bngel_user` where `username` like CONCAT('%',#{username},'%');
     </select>
+
+    <select id="judgeUserExists" resultType="Integer">
+        SELECT COUNT(*) FROM `bngel_user`
+        WHERE `phone` = #{user_account} or `email` = #{user_account};
+    </select>
 </mapper>

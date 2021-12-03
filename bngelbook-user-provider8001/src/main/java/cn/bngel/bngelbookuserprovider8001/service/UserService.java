@@ -24,4 +24,6 @@ public interface UserService{
     List<User> getFriendsById(Long id);
 
     List<User> getUsersByUsername(String username);
+
+    Integer registerUser(User user, Integer type);
 }

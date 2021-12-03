@@ -38,4 +38,7 @@ public interface UserService {
 
     @GetMapping("/user/{username}")
     CommonResult<List<User>> getUsersByUsername(@PathVariable("username") String username);
+
+    @PostMapping("/user/register/{type}")
+    CommonResult<Boolean> registerUser(@RequestBody User user, @PathVariable("type") Integer type);
 }
