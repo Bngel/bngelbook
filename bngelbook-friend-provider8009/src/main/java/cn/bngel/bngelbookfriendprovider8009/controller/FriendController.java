@@ -3,6 +3,7 @@ package cn.bngel.bngelbookfriendprovider8009.controller;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.Friend;
 import cn.bngel.bngelbookfriendprovider8009.service.FriendService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -124,5 +125,14 @@ public class FriendController {
             log.info("查询 ["+ userId +"] 好友失败");
             return CommonResult.commonFailureResult();
         }
+    }
+
+    @PostMapping("/friend/judge")
+    @ApiOperation(value = "Friend - 判断好友关系")
+    public CommonResult judgeFriendExists(@RequestParam("user1Id") Long user1Id,
+                                          @RequestParam("user2Id") Long user2Id) {
+        boolean exists = friendService.judgeFriendExists(user1Id, user2Id) == 1;
+        log.info("查询 ["+ user1Id +"] 与 "+ user2Id +"好友关系: [" + exists + "] 成功");
+        return new CommonResult(CommonResult.SUCCESS_CODE, exists, CommonResult.SUCCESS_MESSAGE);
     }
 }

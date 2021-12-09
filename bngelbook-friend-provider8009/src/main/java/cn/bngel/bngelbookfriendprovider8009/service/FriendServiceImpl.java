@@ -50,4 +50,11 @@ public class FriendServiceImpl implements FriendService{
     public List<Friend> getFriendsByUserId(Long userId) {
         return friendDao.getFriendsByUserId(userId);
     }
+
+    @Override
+    public Integer judgeFriendExists(Long user1Id, Long user2Id) {
+        return friendDao.judgeFriendExists(user1Id, user2Id);
+    }
+
+
 }

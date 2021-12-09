@@ -95,7 +95,7 @@ public class FriendController {
         return result;
     }
 
-    @GetMapping("/friend/{userId}")
+    @PostMapping("/friend/{userId}")
     @ApiOperation(value = "Friend - 查询好友关系 by 用户ID")
     public CommonResult getFriendsByUserId(@PathVariable("userId") Long userId) {
         CommonResult<List<Friend>> result = friendService.getFriendsByUserId(userId);
@@ -105,6 +105,15 @@ public class FriendController {
         else {
             log.info("查询 ["+ userId +"] 好友失败");
         }
+        return result;
+    }
+
+    @PostMapping("/friend/judge")
+    @ApiOperation(value = "Friend - 判断好友关系")
+    public CommonResult judgeFriendExists(@RequestParam("user1Id") Long user1Id,
+                                          @RequestParam("user2Id") Long user2Id) {
+        CommonResult result = friendService.judgeFriendExists(user1Id, user2Id);
+        log.info("查询 ["+ user1Id +"] 与 "+ user2Id +"好友关系: [" + result + "] 成功");
         return result;
     }
 }

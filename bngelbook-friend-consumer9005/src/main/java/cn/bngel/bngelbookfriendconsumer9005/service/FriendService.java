@@ -3,6 +3,7 @@ package cn.bngel.bngelbookfriendconsumer9005.service;
 
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.Friend;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public interface FriendService {
     @GetMapping("/friend")
     CommonResult<Friend> getFriendById(@RequestParam("id") Long id);
 
-    @GetMapping("/friend/{userId}")
+    @PostMapping("/friend/{userId}")
     CommonResult<List<Friend>> getFriendsByUserId(@PathVariable("userId") Long userId);
+
+    @PostMapping("/friend/judge")
+    CommonResult judgeFriendExists(@RequestParam("user1Id") Long user1Id, @RequestParam("user2Id") Long user2Id);
 }

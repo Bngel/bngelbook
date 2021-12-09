@@ -1,6 +1,7 @@
 package cn.bngel.bngelbookfriendprovider8009.service;
 
 import cn.bngel.bngelbookcommonapi.bean.Friend;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface FriendService {
     Friend getFriendById(Long id);
 
     List<Friend> getFriendsByUserId(Long userId);
+
+    Integer judgeFriendExists(Long user1Id, Long user2Id);
 }
