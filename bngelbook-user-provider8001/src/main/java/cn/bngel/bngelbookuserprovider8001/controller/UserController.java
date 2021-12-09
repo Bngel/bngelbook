@@ -88,7 +88,7 @@ public class UserController {
         User user = userService.getUserById(id);
         if (user != null) {
             log.info("查询用户: [" + user + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, user, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(user);
         }
         else {
             log.info("查询用户: [" + id + "]: 失败");
@@ -103,7 +103,7 @@ public class UserController {
         User user = userService.login(account, password);
         if (user != null) {
             log.info("用户登录: [" + user + "]");
-            return new CommonResult(CommonResult.SUCCESS_CODE, user, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(user);
         }
         else {
             log.info("登录失败: [" + account + "]");
@@ -117,7 +117,7 @@ public class UserController {
         Integer days = userService.getUserRegisterDays(id);
         if (days != null) {
             log.info("用户注册时间: [" + days + "]");
-            return new CommonResult(CommonResult.SUCCESS_CODE, days, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(days);
         }
         else {
             log.info("查询失败: [ id:" + id + "]");
@@ -131,7 +131,7 @@ public class UserController {
         List<User> friends = userService.getFriendsById(id);
         if (friends != null) {
             log.info("用户好友列表: [" + id + "] 获取成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, friends, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(friends);
         }
         else {
             log.info("用户好友列表: [" + id + "] 获取失败");
@@ -145,7 +145,7 @@ public class UserController {
         List<User> users = userService.getUsersByUsername(username);
         if (users != null) {
             log.info("用户列表: [" + username + "] 获取成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, users, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(users);
         }
         else {
             log.info("用户列表: [" + username + "] 获取失败");

@@ -71,7 +71,7 @@ public class BookController {
         Book result = bookService.getBookById(id);
         if (result != null) {
             log.info("查询账本: [" + id + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, result, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(result);
         }
         else {
             log.info("查询账本: [" + id + "] 失败");
@@ -85,7 +85,7 @@ public class BookController {
         List<Book> results = bookService.getBooksByUserId(userId);
         if (results != null) {
             log.info("查询用户账本: [" + userId + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(results);
         }
         else {
             log.info("查询用户账本: [" + userId + "] 失败");

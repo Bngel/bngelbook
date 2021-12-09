@@ -22,7 +22,7 @@ public class BillController {
 
     @PostMapping("/bill")
     @ApiOperation(value = "Bill - 创建账单")
-    public CommonResult<Boolean> saveBill(@RequestBody Bill bill){
+    public CommonResult saveBill(@RequestBody Bill bill){
         Integer result = billService.saveBill(bill);
         if (result == 1) {
             log.info("创建账单: [" + bill + "] 成功");
@@ -36,7 +36,7 @@ public class BillController {
 
     @DeleteMapping("/bill")
     @ApiOperation(value = "Bill - 删除账单")
-    public CommonResult<Boolean> deleteBillById(@RequestParam("id") Long id) {
+    public CommonResult deleteBillById(@RequestParam("id") Long id) {
         Integer result = billService.deleteBillById(id);
         if (result == 1) {
             log.info("删除账单: [" + id + "] 成功");
@@ -50,7 +50,7 @@ public class BillController {
 
     @PutMapping("/bill")
     @ApiOperation(value = "Bill - 更改账单")
-    public CommonResult<Boolean> updateBillById(@RequestBody Bill bill) {
+    public CommonResult updateBillById(@RequestBody Bill bill) {
         if (bill.getId() == null) {
             return new CommonResult(CommonResult.NULL_ID_ERROR_CODE, CommonResult.NULL_ID_ERROR_MESSAGE);
         }
@@ -71,7 +71,7 @@ public class BillController {
         Bill result = billService.getBillById(id);
         if (result != null) {
             log.info("查询账单: [" + id + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, result, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(result);
         }
         else {
             log.info("查询账单: [" + id + "] 失败");
@@ -86,7 +86,7 @@ public class BillController {
         List<Bill> results = billService.getBillsByBookId(bookId);
         if (results != null) {
             log.info("查询账本账单: [" + bookId + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(results);
         }
         else {
             log.info("查询账本账单: [" + bookId + "] 失败");
@@ -101,7 +101,7 @@ public class BillController {
         List<Bill> results = billService.getMonthBillsByBookId(bookId,month);
         if (results != null) {
             log.info("查询账本" + month +"月账单: [" + bookId + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(results);
         }
         else {
             log.info("查询账本" + month +"月账单: [" + bookId + "] 失败");
@@ -115,7 +115,7 @@ public class BillController {
         List<Bill> results = billService.getBillsByAccountId(accountId);
         if (results != null) {
             log.info("查询账户账单: [" + accountId + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(results);
         }
         else {
             log.info("查询账户账单: [" + accountId + "] 失败");

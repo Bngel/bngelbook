@@ -72,7 +72,7 @@ public class AccountController {
         Account account = accountService.getAccountById(id);
         if (account != null) {
             log.info("查询账户: [" + account + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, account, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(account);
         }
         else {
             log.info("查询账户: [" + id + "] 失败");
@@ -86,7 +86,7 @@ public class AccountController {
         List<Account> results = accountService.getAccountsByUserId(userId);
         if (results != null) {
             log.info("查询 ["+ userId +"] 账户成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, results, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(results);
         }
         else {
             log.info("查询 ["+ userId +"] 账户失败");

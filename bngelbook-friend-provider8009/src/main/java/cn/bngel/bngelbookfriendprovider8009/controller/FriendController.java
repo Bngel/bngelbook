@@ -105,7 +105,7 @@ public class FriendController {
         Friend result = friendService.getFriendById(id);
         if (result != null) {
             log.info("查询好友关系: [" + result + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, result, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(result);
         }
         else {
             log.info("查询好友关系: [" + result + "] 失败");
@@ -119,7 +119,7 @@ public class FriendController {
         List<Friend> result = friendService.getFriendsByUserId(userId);
         if (result != null) {
             log.info("查询 ["+ userId +"] 好友: [" + result + "] 成功");
-            return new CommonResult(CommonResult.SUCCESS_CODE, result, CommonResult.SUCCESS_MESSAGE);
+            return CommonResult.commonSuccessResult(result);
         }
         else {
             log.info("查询 ["+ userId +"] 好友失败");
@@ -133,6 +133,6 @@ public class FriendController {
                                           @RequestParam("user2Id") Long user2Id) {
         boolean exists = friendService.judgeFriendExists(user1Id, user2Id) == 1;
         log.info("查询 ["+ user1Id +"] 与 "+ user2Id +"好友关系: [" + exists + "] 成功");
-        return new CommonResult(CommonResult.SUCCESS_CODE, exists, CommonResult.SUCCESS_MESSAGE);
+        return CommonResult.commonSuccessResult(exists);
     }
 }
