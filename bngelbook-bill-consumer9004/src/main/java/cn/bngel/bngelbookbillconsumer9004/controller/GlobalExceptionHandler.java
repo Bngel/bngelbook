@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
                                                         HttpServletResponse httpServletResponse,
                                                         Exception e) {
         log.debug("Read Timed out");
-        return ResponseEntity.accepted().body(CommonResult.commonFailureResult());
+        return ResponseEntity.accepted().body(CommonResult.timeOutResult());
     }
 
 }

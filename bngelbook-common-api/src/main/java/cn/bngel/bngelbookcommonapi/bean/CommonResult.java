@@ -24,6 +24,8 @@ public class CommonResult<T> {
     public static final String NULL_ID_ERROR_MESSAGE = "ID为空, 请确认输入信息是否正确";
     public static final Integer NULL_ID_ERROR_CODE = 413;
 
+    public static final Integer TIME_OUT_ERROR_CODE = 408;
+
     @ApiModelProperty(value = "响应状态码 默认状态(成功: 200, 失败: 400)", name = "code")
     private Integer code;
     @ApiModelProperty(value = "响应数据", name = "data")
@@ -40,8 +42,13 @@ public class CommonResult<T> {
         return new CommonResult(SUCCESS_CODE, SUCCESS_MESSAGE);
     }
 
+    public static <T> CommonResult<T> commonSuccessResult(T resData) {return new CommonResult(SUCCESS_CODE, resData, SUCCESS_MESSAGE);}
+
     public static CommonResult commonFailureResult() {
         return new CommonResult(FAILURE_CODE, FAILURE_MESSAGE);
     }
 
+    public static <T> CommonResult<T> commonFailureResult(T resData) {return new CommonResult(FAILURE_CODE, resData, FAILURE_MESSAGE);}
+
+    public static CommonResult timeOutResult() {return new CommonResult(TIME_OUT_ERROR_CODE, FAILURE_MESSAGE);}
 }
