@@ -9,13 +9,9 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>bngelbook-user-provider8001</module>
-    <module>bngelbook-user-provider8005</module>
     <module>bngelbook-book-provider8002</module>
-    <module>bngelbook-book-provider8006</module>
     <module>bngelbook-account-provider8003</module>
-    <module>bngelbook-account-provider8007</module>
     <module>bngelbook-bill-provider8004</module>
-    <module>bngelbook-bill-provider8008</module>
     <module>bngelbook-friend-provider8009</module>
     <module>bngelbook-user-consumer9001</module>
     <module>bngelbook-book-consumer9002</module>
