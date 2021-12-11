@@ -16,6 +16,9 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yaml
+        extension-configs:
+          - bngelbook-datasource.yaml
+
 
 mybatis:
   configuration:

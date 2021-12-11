@@ -6,6 +6,7 @@ import cn.bngel.bngelbookuserprovider8001.service.UserService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -152,4 +153,5 @@ public class UserController {
             return new CommonResult(CommonResult.FAILURE_CODE, User.LOGIN_ERROR_MESSAGE);
         }
     }
+
 }
