@@ -135,4 +135,18 @@ public class UserController {
         }
         return results;
     }
+
+    @ApiOperation(value = "User - 发送登录短信")
+    @PostMapping("/user/login/sms")
+    public CommonResult loginBySms(@RequestParam("area") String area,
+                                   @RequestParam("phone") String phone) {
+        CommonResult checkNumber = userService.loginBySms(area, phone);
+        if (checkNumber.getCode().equals(CommonResult.SUCCESS_CODE)) {
+            log.info("用户[" + phone + "]登录: " + checkNumber.getData());
+        }
+        else {
+            log.info("用户[" + phone + "]登录: 发送短信失败");
+        }
+        return checkNumber;
+    }
 }

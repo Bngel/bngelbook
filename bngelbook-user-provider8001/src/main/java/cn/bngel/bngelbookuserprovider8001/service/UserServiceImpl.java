@@ -2,16 +2,48 @@ package cn.bngel.bngelbookuserprovider8001.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8001.dao.UserDao;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.exception.TencentCloudSDKException;
+
+//导入可选配置类
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.common.profile.HttpProfile;
+
+// 导入对应SMS模块的client
+import com.tencentcloudapi.sms.v20210111.SmsClient;
+
+// 导入要请求接口对应的request response类
+import com.tencentcloudapi.sms.v20210111.models.PullSmsReplyStatusRequest;
+import com.tencentcloudapi.sms.v20210111.models.PullSmsReplyStatusResponse;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao userDao;
+
+    @Value("${tencent-cloud.SecretId}")
+    private String secretId;
+
+    @Value("${tencent-cloud.SecretKey}")
+    private String secretKey;
+
+    @Value("${tencent-cloud-sms.sdkAppId}")
+    private String sdkAppId;
+
+    @Value("${tencent-cloud-sms.signName}")
+    private String signName;
+
+    @Value("${tencent-cloud-sms.templateId}")
+    private String templateId;
 
     @Override
     public Integer saveUser(User user) {
@@ -67,6 +99,42 @@ public class UserServiceImpl implements UserService{
         }
         else {
             return -1;
+        }
+    }
+
+    @Override
+    public String smsLogin(String area, String phone) {
+        try {
+            Credential cred = new Credential(secretId, secretKey);
+            HttpProfile httpProfile = new HttpProfile();
+            httpProfile.setReqMethod("POST");
+            httpProfile.setConnTimeout(60);
+            httpProfile.setEndpoint("sms.tencentcloudapi.com");
+            ClientProfile clientProfile = new ClientProfile();
+            clientProfile.setSignMethod("HmacSHA256");
+            clientProfile.setHttpProfile(httpProfile);
+            SmsClient client = new SmsClient(cred, "ap-guangzhou",clientProfile);
+            SendSmsRequest req = new SendSmsRequest();
+            req.setSmsSdkAppId(sdkAppId);
+            req.setSignName(signName);
+            String senderid = "";
+            req.setSenderId(senderid);
+            String extendCode = "";
+            req.setExtendCode(extendCode);
+            req.setTemplateId(templateId);
+            String phoneNumber = area + phone;
+            String[] phoneNumberSet = {phoneNumber};
+            req.setPhoneNumberSet(phoneNumberSet);
+            String checkNumber = String.format("%06d", new Random().nextInt(999999));
+            String[] templateParamSet = {checkNumber, "10"};
+            req.setTemplateParamSet(templateParamSet);
+            SendSmsResponse res = client.SendSms(req);
+            System.out.println(SendSmsResponse.toJsonString(res));
+            System.out.println(res.getRequestId());
+            return checkNumber;
+        } catch (TencentCloudSDKException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 

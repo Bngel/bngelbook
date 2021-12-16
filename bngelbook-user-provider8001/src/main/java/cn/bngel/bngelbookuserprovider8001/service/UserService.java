@@ -26,4 +26,6 @@ public interface UserService{
     List<User> getUsersByUsername(String username);
 
     Integer registerUser(User user, Integer type);
+
+    String smsLogin(String area, String phone);
 }

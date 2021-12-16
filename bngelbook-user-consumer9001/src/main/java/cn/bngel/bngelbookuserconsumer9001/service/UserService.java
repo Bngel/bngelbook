@@ -41,4 +41,7 @@ public interface UserService {
 
     @PostMapping("/user/register/{type}")
     CommonResult<Boolean> registerUser(@RequestBody User user, @PathVariable("type") Integer type);
+
+    @PostMapping("/user/login/sms")
+    CommonResult<String> loginBySms(@RequestParam("area") String area, @RequestParam("phone") String phone);
 }

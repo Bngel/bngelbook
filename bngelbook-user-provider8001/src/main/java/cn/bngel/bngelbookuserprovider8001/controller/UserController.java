@@ -154,4 +154,18 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "User - 发送登录短信")
+    @PostMapping("/user/login/sms")
+    public CommonResult loginBySms(@RequestParam("area") String area,
+                                   @RequestParam("phone") String phone) {
+        String checkNumber = userService.smsLogin(area, phone);
+        if (checkNumber.equals("")) {
+            log.info("用户[" + phone + "]登录: 发送短信失败");
+            return CommonResult.commonFailureResult();
+        }
+        else {
+            log.info("用户[" + phone + "]登录: " + checkNumber);
+            return CommonResult.commonSuccessResult(checkNumber);
+        }
+    }
 }

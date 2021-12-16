@@ -18,6 +18,8 @@ spring:
         file-extension: yaml
         extension-configs:
           - bngelbook-datasource.yaml
+          - bngelbook-tencentcloud.yaml
+          - bngelbook-tencentcloud-sms.yaml
 
 mybatis:
   configuration:
