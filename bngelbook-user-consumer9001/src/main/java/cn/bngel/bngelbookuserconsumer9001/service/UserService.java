@@ -39,9 +39,13 @@ public interface UserService {
     @GetMapping("/user/{username}")
     CommonResult<List<User>> getUsersByUsername(@PathVariable("username") String username);
 
-    @PostMapping("/user/register/{type}")
-    CommonResult<Boolean> registerUser(@RequestBody User user, @PathVariable("type") Integer type);
+    @PostMapping("/user/register")
+    CommonResult<Boolean> registerUser(@RequestBody User user);
 
     @PostMapping("/user/login/sms")
     CommonResult<String> loginBySms(@RequestParam("area") String area, @RequestParam("phone") String phone);
+
+    @PostMapping("/user/login/check")
+    CommonResult<User> loginCodeCheck(@RequestParam("phone") String phone,
+                                       @RequestParam("code") String code);
 }

@@ -14,6 +14,8 @@ public interface UserDao {
 
     User getUserById(@Param("id") Long id);
 
+    User getUserByPhone(@Param("phone") String phone);
+
     User login(@Param("account") String account, @Param("password") String password);
 
     Integer updateUserById(@Param("user") User user);
@@ -24,5 +26,5 @@ public interface UserDao {
 
     List<User> getUsersByUsername(@Param("username") String username);
 
-    Integer judgeUserExists(@Param("user_account") String account);
+    Integer judgeUserExists(@Param("phone") String account);
 }

@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "User - 注册用户")
-    @PostMapping("/user/register/{type}")
-    public CommonResult registerUser(@RequestBody User user, @PathVariable("type") Integer type) {
-        CommonResult<Boolean> result = userService.registerUser(user,type);
+    @PostMapping("/user/register")
+    public CommonResult registerUser(@RequestBody User user) {
+        CommonResult<Boolean> result = userService.registerUser(user);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
             log.info("注册用户: [" + user + "] 成功");
         } else if (result.getCode().equals(User.USER_REGISTERED_ERROR_CODE)){
@@ -148,5 +148,19 @@ public class UserController {
             log.info("用户[" + phone + "]登录: 发送短信失败");
         }
         return checkNumber;
+    }
+
+    @ApiOperation(value = "User - 验证码验证")
+    @PostMapping("/user/login/check")
+    public CommonResult loginCodeCheck(@RequestParam("phone") String phone,
+                                       @RequestParam("code") String code) {
+        CommonResult loginCodeCheck = userService.loginCodeCheck(phone, code);
+        if (loginCodeCheck.getCode().equals(CommonResult.SUCCESS_CODE)) {
+            log.info("用户[" + phone + "]登录: " + ((User)loginCodeCheck.getData()).getUsername());
+        }
+        else {
+            log.info("用户[" + phone + "]登录: 验证码验证失败");
+        }
+        return loginCodeCheck;
     }
 }

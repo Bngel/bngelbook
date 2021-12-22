@@ -15,6 +15,8 @@ public interface UserService{
 
     User getUserById(Long id);
 
+    User getUserByPhone(String phone);
+
     Integer updateUsernameById(Long id, String username);
 
     User login(String account, String password);
@@ -25,7 +27,11 @@ public interface UserService{
 
     List<User> getUsersByUsername(String username);
 
-    Integer registerUser(User user, Integer type);
+    Integer registerUser(User user);
 
     String smsLogin(String area, String phone);
+
+    Boolean smsCheck(String phone, String code);
+
+    Integer judgeUserExists(String phone);
 }

@@ -3,6 +3,7 @@ package cn.bngel.bngelbookuserprovider8001.controller;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8001.service.UserService;
+import cn.hutool.core.lang.UUID;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "User - 注册用户")
-    @PostMapping("/user/register/{type}")
-    public CommonResult registerUser(@RequestBody User user, @PathVariable("type") Integer type) {
-        Integer result = userService.registerUser(user,type);
+    @PostMapping("/user/register")
+    public CommonResult registerUser(@RequestBody User user) {
+        Integer result = userService.registerUser(user);
         if (result == 1) {
             log.info("注册用户: [" + user + "] 成功");
             return CommonResult.commonSuccessResult();
@@ -166,6 +167,45 @@ public class UserController {
         else {
             log.info("用户[" + phone + "]登录: " + checkNumber);
             return CommonResult.commonSuccessResult(checkNumber);
+        }
+    }
+
+    @ApiOperation(value = "User - 验证码验证")
+    @PostMapping("/user/login/check")
+    public CommonResult loginCodeCheck(@RequestParam("phone") String phone,
+                                       @RequestParam("code") String code) {
+        if (userService.smsCheck(phone, code)) {
+            log.info("用户[" + phone + "]登录: 验证码验证成功");
+            if (userService.judgeUserExists(phone) == 0) {
+                User user = new User();
+                user.setUsername(UUID.fastUUID().toString(true).substring(0, 10));
+                user.setPhone(phone);
+                user.setPassword(UUID.fastUUID().toString(true));
+                Integer saveUser = userService.saveUser(user);
+                if (saveUser == 1) {
+                    log.info("用户[" + phone + "]登录: 新用户注册成功");
+                    return CommonResult.commonSuccessResult(user);
+                }
+                else {
+                    log.info("用户[" + phone + "]登录: 新用户注册失败");
+                    return CommonResult.commonFailureResult();
+                }
+            }
+            else {
+                User user = userService.getUserByPhone(phone);
+                if (user != null) {
+                    log.info("用户[" + phone + "]登录: 用户登录成功");
+                    return CommonResult.commonSuccessResult(user);
+                }
+                else {
+                    log.info("用户[" + phone + "]登录: 用户登录失败");
+                    return CommonResult.commonFailureResult();
+                }
+            }
+        }
+        else {
+            log.info("用户[" + phone + "]登录: 验证码验证失败");
+            return CommonResult.commonFailureResult();
         }
     }
 }
