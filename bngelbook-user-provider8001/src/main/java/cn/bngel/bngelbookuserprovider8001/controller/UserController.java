@@ -7,7 +7,6 @@ import cn.hutool.core.lang.UUID;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -166,7 +165,7 @@ public class UserController {
         }
         else {
             log.info("用户[" + phone + "]登录: " + checkNumber);
-            return CommonResult.commonSuccessResult(checkNumber);
+            return CommonResult.commonSuccessResult("OK");
         }
     }
 

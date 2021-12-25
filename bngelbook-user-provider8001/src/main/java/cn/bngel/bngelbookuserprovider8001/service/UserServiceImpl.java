@@ -51,6 +51,9 @@ public class UserServiceImpl implements UserService{
     @Value("${tencent-cloud-sms.templateId}")
     private String templateId;
 
+    @Value("${bngelbook-redis-config.password}")
+    private String redisPassword;
+
     @Override
     public Integer saveUser(User user) {
         return userDao.saveUser(user);
@@ -108,7 +111,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public String smsLogin(String area, String phone) {
         try {
-            String checkNumber = String.format("%06d", new Random().nextInt(999999));
+            String checkNumber = String.format("%04d", new Random().nextInt(9999));
             String s = saveCode(phone, checkNumber);
             if (s.equals("OK")) {
                 sendMessage(area, phone, checkNumber);
@@ -170,7 +173,7 @@ public class UserServiceImpl implements UserService{
 
     private String saveCode(String phone, String code) {
         try {
-            RedisClient redisClient = RedisClient.create("redis://81.68.149.16");
+            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
             StatefulRedisConnection<String, String> connect = redisClient.connect();
             RedisCommands<String, String> sync = connect.sync();
             SetArgs args = SetArgs.Builder.ex(1000 * 60 * 10);
@@ -187,7 +190,7 @@ public class UserServiceImpl implements UserService{
     private Boolean checkCode(String phone, String code) {
         try {
             String key = "loginSms:" + phone;
-            RedisClient redisClient = RedisClient.create("redis://localhost");
+            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
             StatefulRedisConnection<String, String> connect = redisClient.connect();
             RedisCommands<String, String> sync = connect.sync();
             String s = sync.get(key);

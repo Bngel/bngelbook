@@ -20,6 +20,7 @@ spring:
           - bngelbook-datasource.yaml
           - bngelbook-tencentcloud.yaml
           - bngelbook-tencentcloud-sms.yaml
+          - bngelbook-redis-config.yaml
 
 mybatis:
   configuration:
