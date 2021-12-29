@@ -25,6 +25,8 @@
       <module name="bngelbook-bill-provider8008" target="1.7" />
       <module name="bngelbook-book-provider8006" target="1.7" />
       <module name="bngelbook-friend-provider8005" target="1.8" />
+      <module name="bngelbook-launcher" target="1.7" />
+      <module name="bngelbook-token-provider8006" target="1.7" />
       <module name="bngelbook-user-provider8005" target="1.7" />
     </bytecodeTargetLevel>
   </component>
@@ -40,6 +42,8 @@
       <module name="bngelbook-friend-consumer9005" options="" />
       <module name="bngelbook-friend-provider8005" options="-parameters" />
       <module name="bngelbook-friend-provider8009" options="" />
+      <module name="bngelbook-launcher" options="" />
+      <module name="bngelbook-token-provider8006" options="" />
       <module name="bngelbook-user-consumer9001" options="" />
       <module name="bngelbook-user-provider8001" options="" />
     </option>

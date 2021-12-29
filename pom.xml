@@ -20,6 +20,7 @@
     <module>bngelbook-friend-consumer9005</module>
     <module>bngelbook-common-api</module>
   </modules>
+
   <packaging>pom</packaging>
 
   <name>bngelbook</name>
@@ -29,10 +30,16 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <copy.jar.directory>D:/git/JAVA/Project/bngelbook/bngelbook-jar</copy.jar.directory>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.24</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -75,16 +82,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-      <plugins>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <configuration>
-            <fork>true</fork>
-            <addResources>true</addResources>
-          </configuration>
-        </plugin>
-      </plugins>
-  </build>
 </project>

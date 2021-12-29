@@ -10,6 +10,7 @@
     <artifactId>bngelbook-account-provider8003</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bngelbook-account-provider8003</name>
+    <packaging>jar</packaging>
     <description>module account of bngelbook</description>
     <properties>
         <java.version>1.8</java.version>
@@ -70,22 +71,41 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${copy.jar.directory}">
+                                    <fileset dir="${project.build.directory}">
+                                        <include name="${project.artifactId}-${project.version}.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
+                <version>2.3.12.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>
