@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bngel.bngelbookprovider8000.dao.BookDao">
+
+    <insert id="saveBook">
+        insert into bngel_book(`name`, `user_id`, `type`) values (#{book.name}, #{book.userId}, #{book.type});
+    </insert>
+
+    <delete id="deleteBookById">
+        delete from bngel_book where `id` = #{id};
+    </delete>
+
+    <update id="updateBookById">
+        update bngel_book
+        <set>
+            <if test="book.name != null">`name`=#{book.name},</if>
+            <if test="book.type != null">`type`=#{book.type}</if>
+        </set>
+        where `id`=#{book.id};
+    </update>
+
+    <select id="getBookById" resultType="cn.bngel.bngelbookcommonapi.bean.Book">
+        select * from bngel_book where `id`=#{id};
+    </select>
+
+    <select id="getBooksByUserId" resultType="cn.bngel.bngelbookcommonapi.bean.Book">
+        select * from bngel_book where `user_id`=#{userId};
+    </select>
+</mapper>

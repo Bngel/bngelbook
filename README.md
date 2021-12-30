@@ -1,6 +1,6 @@
-# bngelbook
+# bngelbook-integration
 
-> 经过一段时间的学习后决定用来练手的后端项目
+> 服务器带不动main分支中的那么多微服务. 出此下策整合起来跑
 
 # 当前进度:
 

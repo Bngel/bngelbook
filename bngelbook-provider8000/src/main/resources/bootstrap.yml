@@ -1,0 +1,39 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: bngelbook-provider
+  jackson:
+    date-format: yyyy-MM-dd
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        extension-configs:
+          - bngelbook-datasource.yaml
+          - bngelbook-tencentcloud.yaml
+          - bngelbook-tencentcloud-sms.yaml
+          - bngelbook-redis-config.yaml
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+seata:
+  tx-service-group: bngel_tx_group
+  enable-auto-data-source-proxy: false
+  service:
+    vgroup-mapping:
+      bngel_tx_group: default
+  client:
+    undo:
+      log-serialization: kryo

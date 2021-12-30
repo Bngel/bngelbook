@@ -1,0 +1,22 @@
+package cn.bngel.bngelbookprovider8000.service;
+
+import cn.bngel.bngelbookcommonapi.bean.Bill;
+
+import java.util.List;
+
+public interface BillService {
+
+    Integer saveBill(Bill bill);
+
+    Integer deleteBillById(Long id);
+
+    Integer updateBillById(Bill bill);
+
+    Bill getBillById(Long id);
+
+    List<Bill> getBillsByBookId(Long bookId);
+
+    List<Bill> getBillsByAccountId(Long accountId);
+
+    List<Bill> getMonthBillsByBookId(Long bookId, Integer month);
+}

@@ -17,6 +17,8 @@
         <option value="$PROJECT_DIR$/bngelbook-bill-consumer9004/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-friend-provider8009/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-friend-consumer9005/pom.xml" />
+        <option value="$PROJECT_DIR$/bngelbook-provider8000/pom.xml" />
+        <option value="$PROJECT_DIR$/bngelbook-consumer9000/pom.xml" />
       </list>
     </option>
   </component>

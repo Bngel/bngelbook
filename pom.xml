@@ -8,16 +8,8 @@
   <artifactId>bngelbook</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>bngelbook-user-provider8001</module>
-    <module>bngelbook-book-provider8002</module>
-    <module>bngelbook-account-provider8003</module>
-    <module>bngelbook-bill-provider8004</module>
-    <module>bngelbook-friend-provider8009</module>
-    <module>bngelbook-user-consumer9001</module>
-    <module>bngelbook-book-consumer9002</module>
-    <module>bngelbook-account-consumer9003</module>
-    <module>bngelbook-bill-consumer9004</module>
-    <module>bngelbook-friend-consumer9005</module>
+    <module>bngelbook-provider8000</module>
+    <module>bngelbook-consumer9000</module>
     <module>bngelbook-common-api</module>
   </modules>
   <packaging>pom</packaging>
