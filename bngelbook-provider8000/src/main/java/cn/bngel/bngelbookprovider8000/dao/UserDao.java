@@ -3,7 +3,9 @@ package cn.bngel.bngelbookprovider8000.dao;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Mapper
@@ -28,4 +30,5 @@ public interface UserDao {
     List<User> getUsersByUsername(@Param("username") String username);
 
     Integer judgeUserExists(@Param("phone") String account);
+
 }

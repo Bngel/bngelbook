@@ -13,12 +13,23 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.SetArgs;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.ClientConfig;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.http.HttpProtocol;
+import com.qcloud.cos.region.Region;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -206,5 +217,44 @@ public class UserServiceImpl implements UserService{
             e.printStackTrace();
             return false;
         }
+    }
+
+
+    @Override
+    public String uploadProfile(MultipartFile file) throws IOException {
+        COSClient cosClient = getCosClient();
+        String filepath = System.getProperty("user.dir");
+        String bucketName = "bngelbook-profile-1302039980";
+        String fileName = file.getOriginalFilename();
+        File dest = new File(filepath + '\\' + fileName);
+        file.transferTo(dest);
+        String uuid = UUID.randomUUID().toString();
+        cosClient.putObject(bucketName, uuid + fileName, dest);
+        return cosClient.getObjectUrl(bucketName, uuid + fileName).toString();
+    }
+
+    private COSClient getCosClient() {
+        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.setRegion(new Region("ap-guangzhou"));
+        clientConfig.setHttpProtocol(HttpProtocol.https);
+        return new COSClient(cred, clientConfig);
+    }
+
+    @Override
+    @GlobalTransactional(name = "bngelbook-user-upload-profile", rollbackFor = Exception.class)
+    public String updateProfile(Long id, MultipartFile profile) throws  IOException {
+        String profileUrl = uploadProfile(profile);
+        if (profileUrl == null)
+            return null;
+        User user = getUserById(id);
+        if (user == null)
+            return null;
+        user.setProfile(profileUrl);
+        Integer saveUser = updateUserById(user);
+        if (saveUser == 1)
+            return profileUrl;
+        else
+            return null;
     }
 }

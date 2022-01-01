@@ -1,7 +1,9 @@
 package cn.bngel.bngelbookprovider8000.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService{
@@ -33,4 +35,8 @@ public interface UserService{
     Boolean smsCheck(String phone, String code);
 
     Integer judgeUserExists(String phone);
+
+    String uploadProfile(MultipartFile file) throws IOException;
+
+    String updateProfile(Long id, MultipartFile profile) throws IOException;
 }
