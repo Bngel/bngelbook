@@ -3,6 +3,7 @@ package cn.bngel.bngelbookbookconsumer9002.controller;
 import cn.bngel.bngelbookbookconsumer9002.service.BookService;
 import cn.bngel.bngelbookcommonapi.bean.Book;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@Api(tags = "账本模块")
 @RequestMapping("/consumer")
 public class BookController {
 

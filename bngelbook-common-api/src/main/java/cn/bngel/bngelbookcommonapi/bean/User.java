@@ -41,4 +41,8 @@ public class User {
     private Date birthday;
     @ApiModelProperty(value = "注册日期, 无需传入, 后端会自动填写", name = "registerDate")
     private Date registerDate;
+
+    public void setRegisterDate() {
+        setRegisterDate(new Date(new java.util.Date().getTime()));
+    }
 }
