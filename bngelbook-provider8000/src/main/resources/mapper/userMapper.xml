@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bngel.bngelbookprovider8000.dao.UserDao">
 
-    <insert id="saveUser">
+    <insert id="saveUser" parameterType="cn.bngel.bngelbookcommonapi.bean.User" keyProperty="id" useGeneratedKeys="true">
         insert into bngel_user(username, password, phone, email, gender, birthday, register_date, profile)
-         values (#{user.username}, #{user.password}, #{user.phone}, #{user.email}, #{user.gender},
-                 #{user.birthday}, now(), #{user.profile});
+        values (#{user.username}, #{user.password}, #{user.phone}, #{user.email}, #{user.gender},
+        #{user.birthday}, now(), #{user.profile});
     </insert>
 
     <delete id="deleteUserById">

@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class UserController {
     @ApiOperation(value = "User - 创建用户")
     @PostMapping("/user")
     public CommonResult saveUser(@RequestBody User user) {
-        user.setRegisterDate(new Date(new java.util.Date().getTime()));
+        user.setRegisterDate();
         Integer result = userService.saveUser(user);
         if (result == 1) {
             log.info("创建用户: [" + user + "] 成功");
@@ -181,10 +180,11 @@ public class UserController {
                 user.setUsername(UUID.fastUUID().toString(true).substring(0, 10));
                 user.setPhone(phone);
                 user.setPassword(UUID.fastUUID().toString(true));
-                Integer saveUser = userService.saveUser(user);
-                if (saveUser == 1) {
-                    log.info("用户[" + phone + "]登录: 新用户注册成功");
-                    return CommonResult.commonSuccessResult(user);
+                user.setRegisterDate();
+                Integer result = userService.saveUser(user);
+                if (result != null) {
+                    log.info("用户[" + phone + "]登录: [ID:"+ result + "]新用户注册成功");
+                    return CommonResult.commonSuccessResult();
                 }
                 else {
                     log.info("用户[" + phone + "]登录: 新用户注册失败");

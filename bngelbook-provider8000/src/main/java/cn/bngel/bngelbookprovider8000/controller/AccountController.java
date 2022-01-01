@@ -1,6 +1,5 @@
 package cn.bngel.bngelbookprovider8000.controller;
 
-
 import cn.bngel.bngelbookcommonapi.bean.Account;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookprovider8000.service.AccountService;

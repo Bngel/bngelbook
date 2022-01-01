@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/bngelbook-account-consumer9003/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-account-consumer9003/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-account-provider8003/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-account-provider8003/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-bill-consumer9004/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-bill-consumer9004/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-bill-provider8004/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-bill-provider8004/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-book-consumer9002/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-book-consumer9002/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-book-provider8002/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-book-provider8002/src/main/resources" charset="UTF-8" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/bngelbook-common-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-consumer9000/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-consumer9000/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-friend-consumer9005/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-friend-consumer9005/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-friend-provider8009/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-friend-provider8009/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-provider8000/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-provider8000/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-user-consumer9001/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-user-consumer9001/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-user-provider8001/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bngelbook-user-provider8001/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

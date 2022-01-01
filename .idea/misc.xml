@@ -5,18 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-user-provider8001/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-common-api/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-book-provider8002/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-account-provider8003/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-bill-provider8004/pom.xml" />
         <option value="$PROJECT_DIR$/bngel-user-consumer9001/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-user-consumer9001/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-book-consumer9002/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-account-consumer9003/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-bill-consumer9004/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-friend-provider8009/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-friend-consumer9005/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-provider8000/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-consumer9000/pom.xml" />
       </list>
