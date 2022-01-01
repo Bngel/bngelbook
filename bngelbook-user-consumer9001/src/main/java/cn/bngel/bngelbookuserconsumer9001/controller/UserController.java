@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -162,5 +164,31 @@ public class UserController {
             log.info("用户[" + phone + "]登录: 验证码验证失败");
         }
         return loginCodeCheck;
+    }
+
+    @ApiOperation(value = "User - 上传用户头像")
+    @PostMapping(value = "/user/profile/upload", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
+    public CommonResult postUserProfile(@RequestPart("profile") MultipartFile profile) throws IOException {
+        CommonResult result = userService.uploadUserProfile(profile);
+        if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
+            log.info("用户上传头像文件: " + result.getData());
+        }
+        else {
+            log.info("用户上传头像文件: 失败");
+        }
+        return result;
+    }
+
+    @ApiOperation(value = "User - 更新用户头像")
+    @PostMapping(value = "/user/profile", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
+    public CommonResult postUserProfile(@RequestParam("id") Long id, @RequestPart("profile") MultipartFile profile) throws IOException {
+        CommonResult result = userService.postUserProfile(id, profile);
+        if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
+            log.info("用户上传头像文件: " + result.getData());
+        }
+        else {
+            log.info("用户上传头像文件: 失败");
+        }
+        return result;
     }
 }

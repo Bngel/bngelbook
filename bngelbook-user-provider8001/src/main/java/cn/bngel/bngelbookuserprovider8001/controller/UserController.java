@@ -4,11 +4,20 @@ import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8001.service.UserService;
 import cn.hutool.core.lang.UUID;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.ClientConfig;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.http.HttpProtocol;
+import com.qcloud.cos.region.Region;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -207,4 +216,32 @@ public class UserController {
             return CommonResult.commonFailureResult();
         }
     }
+
+    @ApiOperation(value = "User - 上传头像")
+    @PostMapping(value = "/user/profile/upload")
+    public CommonResult uploadUserProfile(@RequestParam("profile") MultipartFile profile) throws IOException {
+        String profileUrl = userService.uploadProfile(profile);
+        if (profileUrl != null) {
+            log.info("用户上传头像文件: " + profileUrl);
+            return CommonResult.commonSuccessResult(profileUrl);
+        }
+        else {
+            log.info("用户上传头像文件: 失败");
+            return CommonResult.commonFailureResult();
+        }
+    }
+
+    @ApiOperation(value = "User - 更新用户头像")
+    @PostMapping(value = "/user/profile")
+    public CommonResult postUserProfile(@RequestParam("id") Long id, @RequestPart("profile") MultipartFile profile) throws IOException {
+        String profileUrl = userService.updateProfile(id, profile);
+        if (profileUrl != null) {
+            return CommonResult.commonSuccessResult(profileUrl);
+        }
+        else {
+            return CommonResult.commonFailureResult();
+        }
+    }
+
+
 }
