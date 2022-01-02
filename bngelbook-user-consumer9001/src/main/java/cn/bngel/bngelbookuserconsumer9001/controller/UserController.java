@@ -166,15 +166,17 @@ public class UserController {
         return loginCodeCheck;
     }
 
-    @ApiOperation(value = "User - 上传用户头像")
-    @PostMapping(value = "/user/profile/upload", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
-    public CommonResult postUserProfile(@RequestPart("profile") MultipartFile profile) throws IOException {
-        CommonResult result = userService.uploadUserProfile(profile);
+    @ApiOperation(value = "User - 上传文件")
+    @PostMapping(value = "/user/upload", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
+    CommonResult uploadUserFile(@RequestParam("file") MultipartFile file,
+                                   @RequestParam("bucket") String bucket,
+                                   @RequestParam("cosPath") String cosPath) throws IOException {
+        CommonResult result = userService.uploadUserFile(file, bucket, cosPath);
         if (result.getCode().equals(CommonResult.SUCCESS_CODE)) {
-            log.info("用户上传头像文件: " + result.getData());
+            log.info("用户上传文件: " + result.getData());
         }
         else {
-            log.info("用户上传头像文件: 失败");
+            log.info("用户上传文件: 失败");
         }
         return result;
     }

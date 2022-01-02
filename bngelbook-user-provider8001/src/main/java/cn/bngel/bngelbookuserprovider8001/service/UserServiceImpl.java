@@ -57,6 +57,9 @@ public class UserServiceImpl implements UserService{
     @Value("${tencent-cloud.SecretKey}")
     private String secretKey;
 
+    @Value("${tencent-cloud.APPID}")
+    private String appId;
+
     @Value("${tencent-cloud-sms.sdkAppId}")
     private String sdkAppId;
 
@@ -234,16 +237,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String uploadProfile(MultipartFile file) throws IOException {
+    public String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException {
         COSClient cosClient = getCosClient();
         String filepath = System.getProperty("user.dir");
-        String bucketName = "bngelbook-profile-1302039980";
         String fileName = file.getOriginalFilename();
         File dest = new File(filepath + '\\' + fileName);
         file.transferTo(dest);
-        String uuid = UUID.randomUUID().toString();
-        cosClient.putObject(bucketName, uuid + fileName, dest);
-        return cosClient.getObjectUrl(bucketName, uuid + fileName).toString();
+        cosClient.putObject(bucket, cosPath, dest);
+        return cosPath;
     }
 
     private COSClient getCosClient() {
@@ -257,7 +258,8 @@ public class UserServiceImpl implements UserService{
     @Override
     @GlobalTransactional(name = "bngelbook-user-upload-profile", rollbackFor = Exception.class)
     public String updateProfile(Long id, MultipartFile profile) throws  IOException {
-        String profileUrl = uploadProfile(profile);
+        String bucketName = "bngelbook-profile-" + appId;
+        String profileUrl = uploadFile(profile, bucketName, id + "/profile.png");
         if (profileUrl == null)
             return null;
         User user = getUserById(id);

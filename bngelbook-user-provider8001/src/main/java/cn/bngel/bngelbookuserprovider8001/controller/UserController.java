@@ -217,16 +217,18 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "User - 上传头像")
-    @PostMapping(value = "/user/profile/upload")
-    public CommonResult uploadUserProfile(@RequestParam("profile") MultipartFile profile) throws IOException {
-        String profileUrl = userService.uploadProfile(profile);
+    @ApiOperation(value = "User - 上传文件")
+    @PostMapping(value = "/user/upload")
+    public CommonResult uploadUserProfile(@RequestParam("file") MultipartFile file,
+                                          @RequestParam("bucket") String bucket,
+                                          @RequestParam("cosPath") String cosPath) throws IOException {
+        String profileUrl = userService.uploadFile(file, bucket, cosPath);
         if (profileUrl != null) {
-            log.info("用户上传头像文件: " + profileUrl);
+            log.info("用户上传文件: " + profileUrl);
             return CommonResult.commonSuccessResult(profileUrl);
         }
         else {
-            log.info("用户上传头像文件: 失败");
+            log.info("用户上传文件: 失败");
             return CommonResult.commonFailureResult();
         }
     }

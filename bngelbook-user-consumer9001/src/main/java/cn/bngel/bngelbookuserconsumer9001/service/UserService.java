@@ -50,8 +50,10 @@ public interface UserService {
     CommonResult<User> loginCodeCheck(@RequestParam("phone") String phone,
                                        @RequestParam("code") String code);
 
-    @PostMapping(value = "/user/profile/upload", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
-    CommonResult<String> uploadUserProfile(@RequestPart("profile") MultipartFile profile) throws IOException;
+    @PostMapping(value = "/user/upload", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
+    CommonResult<String> uploadUserFile(@RequestParam("file") MultipartFile file,
+                                          @RequestParam("bucket") String bucket,
+                                          @RequestParam("cosPath") String cosPath) throws IOException;
 
     @PostMapping(value = "/user/profile", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
     CommonResult<String> postUserProfile(@RequestParam("id") Long id, @RequestPart("profile") MultipartFile profile) throws IOException;
