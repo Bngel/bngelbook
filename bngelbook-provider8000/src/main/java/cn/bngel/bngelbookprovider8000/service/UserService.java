@@ -36,7 +36,7 @@ public interface UserService{
 
     Integer judgeUserExists(String phone);
 
-    String uploadProfile(MultipartFile file) throws IOException;
+    String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException;
 
     String updateProfile(Long id, MultipartFile profile) throws IOException;
 }
