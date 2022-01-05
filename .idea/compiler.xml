@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bngelbook-common-api" />
+        <module name="bngelbook-common-api (2)" />
         <module name="bngelbook-consumer9000" />
         <module name="bngelbook-provider8000" />
+        <module name="bngelbook-common-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="bngelbook-book-consumer9002" target="1.7" />
       <module name="bngelbook-book-provider8002" target="1.7" />
       <module name="bngelbook-book-provider8006" target="1.7" />
+      <module name="bngelbook-common-api" target="8" />
       <module name="bngelbook-friend-consumer9005" target="1.7" />
       <module name="bngelbook-friend-provider8005" target="1.8" />
       <module name="bngelbook-friend-provider8009" target="1.7" />

@@ -1,35 +1,45 @@
 package cn.bngel.bngelbookprovider8000.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
+import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
 import cn.bngel.bngelbookprovider8000.dao.UserDao;
-import com.tencentcloudapi.common.Credential;
-import com.tencentcloudapi.common.exception.TencentCloudSDKException;
-import com.tencentcloudapi.common.profile.ClientProfile;
-import com.tencentcloudapi.common.profile.HttpProfile;
-import com.tencentcloudapi.sms.v20210111.SmsClient;
-import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
-import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
-import io.lettuce.core.RedisClient;
-import io.lettuce.core.SetArgs;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.sync.RedisCommands;
-import io.seata.spring.annotation.GlobalTransactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import cn.hutool.core.codec.Base32;
+import cn.hutool.core.util.IdUtil;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.region.Region;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
+import io.lettuce.core.SetArgs;
+import io.seata.spring.annotation.GlobalTransactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.exception.TencentCloudSDKException;
+
+//导入可选配置类
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.common.profile.HttpProfile;
+
+// 导入对应SMS模块的client
+import com.tencentcloudapi.sms.v20210111.SmsClient;
+
+// 导入要请求接口对应的request response类
+import com.tencentcloudapi.sms.v20210111.models.PullSmsReplyStatusRequest;
+import com.tencentcloudapi.sms.v20210111.models.PullSmsReplyStatusResponse;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -176,52 +186,32 @@ public class UserServiceImpl implements UserService{
     }
 
     private String saveCode(String phone, String code) {
-        try {
-            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
-            StatefulRedisConnection<String, String> connect = redisClient.connect();
-            RedisCommands<String, String> sync = connect.sync();
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (String) simpleRedisClient.sync( sync -> {
             SetArgs args = SetArgs.Builder.ex(1000 * 60 * 10);
-            String s = sync.set("loginSms:" + phone, code, args);
-            connect.close();
-            redisClient.shutdown();
-            return s;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+            return sync.set("loginSms:" + phone, code, args);
+        });
     }
 
     private Boolean checkCode(String phone, String code) {
-        try {
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (Boolean)simpleRedisClient.sync( sync -> {
             String key = "loginSms:" + phone;
-            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
-            StatefulRedisConnection<String, String> connect = redisClient.connect();
-            RedisCommands<String, String> sync = connect.sync();
             String s = sync.get(key);
             if (s == null) {
-                connect.close();
-                redisClient.shutdown();
                 return false;
             }
             else {
                 if (s.equals(code)) {
                     sync.del(key);
-                    connect.close();
-                    redisClient.shutdown();
                     return true;
                 }
                 else {
-                    connect.close();
-                    redisClient.shutdown();
                     return false;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        });
     }
-
 
     @Override
     public String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException {
@@ -248,7 +238,6 @@ public class UserServiceImpl implements UserService{
         String bucketName = "bngelbook-profile-" + appId;
         String profileUrl = uploadFile(profile, bucketName, id + "/profile.png");
         if (profileUrl == null)
-        if (profileUrl == null)
             return null;
         User user = getUserById(id);
         if (user == null)
@@ -260,4 +249,19 @@ public class UserServiceImpl implements UserService{
         else
             return null;
     }
+
+    @Override
+    public String createToken(Long id, Integer expiredTime) {
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (String) simpleRedisClient.sync(sync -> {
+            String token = Base32.encode(id + "-" + IdUtil.objectId());
+            SetArgs args = SetArgs.Builder.ex(expiredTime);
+            String tokenSet = sync.set("token:" + id, token, args);
+            if (tokenSet.equals("OK"))
+                return token;
+            else
+                return null;
+        });
+    }
+
 }

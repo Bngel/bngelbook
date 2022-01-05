@@ -5,10 +5,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/bngelbook-common-api/pom.xml" />
         <option value="$PROJECT_DIR$/bngel-user-consumer9001/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-provider8000/pom.xml" />
         <option value="$PROJECT_DIR$/bngelbook-consumer9000/pom.xml" />
+        <option value="$PROJECT_DIR$/bngelbook-common-api/pom.xml" />
       </list>
     </option>
   </component>

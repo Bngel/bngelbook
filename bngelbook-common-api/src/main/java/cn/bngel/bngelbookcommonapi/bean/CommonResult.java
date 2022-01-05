@@ -26,6 +26,9 @@ public class CommonResult<T> {
 
     public static final Integer TIME_OUT_ERROR_CODE = 408;
 
+    public static final Integer TOKEN_ERROR_CODE = 490;
+    public static final String TOKEN_ERROR_MESSAGE = "鉴权失败";
+
     @ApiModelProperty(value = "响应状态码 默认状态(成功: 200, 失败: 400)", name = "code")
     private Integer code;
     @ApiModelProperty(value = "响应数据", name = "data")
@@ -51,4 +54,6 @@ public class CommonResult<T> {
     public static <T> CommonResult<T> commonFailureResult(T resData) {return new CommonResult(FAILURE_CODE, resData, FAILURE_MESSAGE);}
 
     public static CommonResult timeOutResult() {return new CommonResult(TIME_OUT_ERROR_CODE, FAILURE_MESSAGE);}
+
+    public static CommonResult tokenErrorResult() { return new CommonResult(TOKEN_ERROR_CODE, TOKEN_ERROR_MESSAGE); }
 }

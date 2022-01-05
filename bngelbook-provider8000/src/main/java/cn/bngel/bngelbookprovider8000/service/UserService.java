@@ -39,4 +39,7 @@ public interface UserService{
     String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException;
 
     String updateProfile(Long id, MultipartFile profile) throws IOException;
+
+    String createToken(Long id, Integer expiredTime);
+
 }
