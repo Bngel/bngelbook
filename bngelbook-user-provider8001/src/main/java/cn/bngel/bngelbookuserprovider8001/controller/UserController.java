@@ -4,19 +4,12 @@ import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookuserprovider8001.service.UserService;
 import cn.hutool.core.lang.UUID;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.ClientConfig;
-import com.qcloud.cos.auth.BasicCOSCredentials;
-import com.qcloud.cos.auth.COSCredentials;
-import com.qcloud.cos.http.HttpProtocol;
-import com.qcloud.cos.region.Region;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -112,7 +105,8 @@ public class UserController {
         User user = userService.login(account, password);
         if (user != null) {
             log.info("用户登录: [" + user + "]");
-            return CommonResult.commonSuccessResult(user);
+            return new CommonResult(CommonResult.SUCCESS_CODE, user,
+                    userService.createToken(user.getId(), 24*60*60*1000));
         }
         else {
             log.info("登录失败: [" + account + "]");
@@ -192,7 +186,8 @@ public class UserController {
                 Integer result = userService.saveUser(user);
                 if (result != null) {
                     log.info("用户[" + phone + "]登录: [ID:"+ result + "]新用户注册成功");
-                    return CommonResult.commonSuccessResult();
+                    return new CommonResult(CommonResult.SUCCESS_CODE, user,
+                            userService.createToken(user.getId(), 24*60*60*1000));
                 }
                 else {
                     log.info("用户[" + phone + "]登录: 新用户注册失败");
@@ -203,7 +198,8 @@ public class UserController {
                 User user = userService.getUserByPhone(phone);
                 if (user != null) {
                     log.info("用户[" + phone + "]登录: 用户登录成功");
-                    return CommonResult.commonSuccessResult(user);
+                    return new CommonResult(CommonResult.SUCCESS_CODE, user,
+                            userService.createToken(user.getId(), 24*60*60*1000));
                 }
                 else {
                     log.info("用户[" + phone + "]登录: 用户登录失败");
@@ -244,6 +240,5 @@ public class UserController {
             return CommonResult.commonFailureResult();
         }
     }
-
 
 }

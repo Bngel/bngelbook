@@ -2,7 +2,15 @@ package cn.bngel.bngelbookuserprovider8001.service;
 
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.User;
+import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
 import cn.bngel.bngelbookuserprovider8001.dao.UserDao;
+import cn.hutool.core.codec.Base32;
+import cn.hutool.core.lang.UUID;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.DES;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -41,9 +49,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -190,50 +197,31 @@ public class UserServiceImpl implements UserService{
     }
 
     private String saveCode(String phone, String code) {
-        try {
-            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
-            StatefulRedisConnection<String, String> connect = redisClient.connect();
-            RedisCommands<String, String> sync = connect.sync();
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (String) simpleRedisClient.sync( sync -> {
             SetArgs args = SetArgs.Builder.ex(1000 * 60 * 10);
-            String s = sync.set("loginSms:" + phone, code, args);
-            connect.close();
-            redisClient.shutdown();
-            return s;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+            return sync.set("loginSms:" + phone, code, args);
+        });
     }
 
     private Boolean checkCode(String phone, String code) {
-        try {
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (Boolean)simpleRedisClient.sync( sync -> {
             String key = "loginSms:" + phone;
-            RedisClient redisClient = RedisClient.create("redis://" + redisPassword + "@81.68.149.16");
-            StatefulRedisConnection<String, String> connect = redisClient.connect();
-            RedisCommands<String, String> sync = connect.sync();
             String s = sync.get(key);
             if (s == null) {
-                connect.close();
-                redisClient.shutdown();
                 return false;
             }
             else {
                 if (s.equals(code)) {
                     sync.del(key);
-                    connect.close();
-                    redisClient.shutdown();
                     return true;
                 }
                 else {
-                    connect.close();
-                    redisClient.shutdown();
                     return false;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        });
     }
 
     @Override
@@ -272,4 +260,19 @@ public class UserServiceImpl implements UserService{
         else
             return null;
     }
+
+    @Override
+    public String createToken(Long id, Integer expiredTime) {
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        return (String) simpleRedisClient.sync(sync -> {
+            String token = Base32.encode(id + "-" + IdUtil.objectId());
+            SetArgs args = SetArgs.Builder.ex(expiredTime);
+            String tokenSet = sync.set("token:" + id, token, args);
+            if (tokenSet.equals("OK"))
+                return token;
+            else
+                return null;
+        });
+    }
+
 }

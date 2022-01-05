@@ -18,6 +18,7 @@ spring:
         file-extension: yaml
         extension-configs:
           - bngelbook-datasource.yaml
+          - bngelbook-redis-config.yaml
 
 mybatis:
   configuration:
