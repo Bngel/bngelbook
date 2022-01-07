@@ -69,6 +69,9 @@ public class UserServiceImpl implements UserService{
     @Value("${bngelbook-redis-config.password}")
     private String redisPassword;
 
+    @Value("${bngelbook-redis-config.host}")
+    private String redisHost;
+
     @Override
     public Integer saveUser(User user) {
         return userDao.saveUser(user);
@@ -187,7 +190,7 @@ public class UserServiceImpl implements UserService{
     }
 
     private String saveCode(String phone, String code) {
-        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisHost, redisPassword);
         return (String) simpleRedisClient.sync( sync -> {
             SetArgs args = SetArgs.Builder.ex(1000 * 60 * 10);
             return sync.set("loginSms:" + phone, code, args);
@@ -195,7 +198,7 @@ public class UserServiceImpl implements UserService{
     }
 
     private Boolean checkCode(String phone, String code) {
-        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
+        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisHost, redisPassword);
         return (Boolean)simpleRedisClient.sync( sync -> {
             String key = "loginSms:" + phone;
             String s = sync.get(key);
@@ -253,7 +256,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String createToken(Long id, Integer expiredTime) {
-        TokenRedisClient tokenRedisClient = new TokenRedisClient(redisPassword);
+        TokenRedisClient tokenRedisClient = new TokenRedisClient(redisHost, redisPassword);
         return tokenRedisClient.createToken(id);
     }
 
