@@ -104,9 +104,15 @@ public class UserController {
                               @RequestParam("password") String password) {
         User user = userService.login(account, password);
         if (user != null) {
-            log.info("用户登录: [" + user + "]");
-            return new CommonResult(CommonResult.SUCCESS_CODE, user,
-                    userService.createToken(user.getId(), 24*60*60*1000));
+            String token = userService.createToken(user.getId());
+            if (token != null) {
+                log.info("用户[" + account + "]登录: [token: " + token + "]");
+                return new CommonResult(CommonResult.SUCCESS_CODE, user, token);
+            }
+            else {
+                log.info("用户[" + account + "]登录: token 获取失败");
+                return new CommonResult(CommonResult.FAILURE_CODE, null, "token获取失败");
+            }
         }
         else {
             log.info("登录失败: [" + account + "]");
@@ -185,9 +191,15 @@ public class UserController {
                 user.setRegisterDate();
                 Integer result = userService.saveUser(user);
                 if (result != null) {
-                    log.info("用户[" + phone + "]登录: [ID:"+ result + "]新用户注册成功");
-                    return new CommonResult(CommonResult.SUCCESS_CODE, user,
-                            userService.createToken(user.getId(), 24*60*60*1000));
+                    String token = userService.createToken(user.getId());
+                    if (token != null) {
+                        log.info("用户[" + phone + "]登录: [ID:"+ result + "]新用户注册成功 [token: " + token + "]");
+                        return new CommonResult(CommonResult.SUCCESS_CODE, user, token);
+                    }
+                    else {
+                        log.info("用户[" + phone + "]登录: token 获取失败");
+                        return new CommonResult(CommonResult.FAILURE_CODE, null, "token获取失败");
+                    }
                 }
                 else {
                     log.info("用户[" + phone + "]登录: 新用户注册失败");
@@ -197,9 +209,15 @@ public class UserController {
             else {
                 User user = userService.getUserByPhone(phone);
                 if (user != null) {
-                    log.info("用户[" + phone + "]登录: 用户登录成功");
-                    return new CommonResult(CommonResult.SUCCESS_CODE, user,
-                            userService.createToken(user.getId(), 24*60*60*1000));
+                    String token = userService.createToken(user.getId());
+                    if (token != null) {
+                        log.info("用户[" + phone + "]登录: 用户登录成功 [token: "+ token +"]}");
+                        return new CommonResult(CommonResult.SUCCESS_CODE, user, token);
+                    }
+                    else {
+                        log.info("用户[" + phone + "]登录: token 获取失败");
+                        return new CommonResult(CommonResult.FAILURE_CODE, null, "token获取失败");
+                    }
                 }
                 else {
                     log.info("用户[" + phone + "]登录: 用户登录失败");

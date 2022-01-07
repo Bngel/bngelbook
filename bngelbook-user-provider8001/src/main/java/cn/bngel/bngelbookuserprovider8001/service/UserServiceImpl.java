@@ -1,11 +1,10 @@
 package cn.bngel.bngelbookuserprovider8001.service;
 
-import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
+import cn.bngel.bngelbookcommonapi.redis.TokenRedisClient;
 import cn.bngel.bngelbookuserprovider8001.dao.UserDao;
-import cn.hutool.core.codec.Base32;
-import cn.hutool.core.lang.UUID;
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.DES;
@@ -19,14 +18,8 @@ import com.qcloud.cos.http.HttpProtocol;
 import com.qcloud.cos.region.Region;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
-import io.lettuce.core.RedisClient;
 import io.lettuce.core.SetArgs;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.async.RedisAsyncCommands;
-import io.lettuce.core.api.sync.RedisCommands;
-import io.netty.channel.ConnectTimeoutException;
 import io.seata.spring.annotation.GlobalTransactional;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -50,7 +43,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -263,16 +257,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String createToken(Long id, Integer expiredTime) {
-        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
-        return (String) simpleRedisClient.sync(sync -> {
-            String token = Base32.encode(id + "-" + IdUtil.objectId());
-            SetArgs args = SetArgs.Builder.ex(expiredTime);
-            String tokenSet = sync.set("token:" + id, token, args);
-            if (tokenSet.equals("OK"))
-                return token;
-            else
-                return null;
-        });
+        TokenRedisClient tokenRedisClient = new TokenRedisClient(redisPassword);
+        return tokenRedisClient.createToken(id);
     }
 
+    @Override
+    public String createToken(Long id) {
+        return createToken(id, null);
+    }
 }

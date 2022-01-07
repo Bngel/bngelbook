@@ -43,4 +43,5 @@ public interface UserService{
 
     String createToken(Long id, Integer expiredTime);
 
+    String createToken(Long id);
 }

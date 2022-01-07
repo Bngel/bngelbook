@@ -6,7 +6,7 @@ import io.lettuce.core.api.sync.RedisCommands;
 
 public class SimpleRedisClient {
 
-    private final RedisClient redisClient;
+    protected final RedisClient redisClient;
 
     public SimpleRedisClient(String password) {
         redisClient = RedisClient.create("redis://" + password + "@bngel.cn");

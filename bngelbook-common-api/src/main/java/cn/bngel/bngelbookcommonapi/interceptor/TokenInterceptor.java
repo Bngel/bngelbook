@@ -2,16 +2,26 @@ package cn.bngel.bngelbookcommonapi.interceptor;
 
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
+import cn.bngel.bngelbookcommonapi.redis.TokenRedisClient;
 import cn.hutool.core.codec.Base32;
+import cn.hutool.core.codec.Base64;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.AES;
+import cn.hutool.crypto.symmetric.DES;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import io.lettuce.core.SetArgs;
+import jdk.nashorn.internal.parser.Token;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 public class TokenInterceptor implements HandlerInterceptor {
 
     private final String password;
@@ -23,7 +33,8 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         String token = request.getHeader("token");
-        if (tokenValid(token))
+        Boolean valid = tokenValid(token);
+        if (valid != null && valid)
             return true;
         else {
             response.setCharacterEncoding("UTF-8");
@@ -37,18 +48,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     }
 
     private Boolean tokenValid(String token) {
-        if (token == null) return false;
-        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(password);
-        return (Boolean) simpleRedisClient.sync(sync -> {
-            String[] split = Base32.decodeStr(token).split("-");
-            if (split.length == 2) {
-                String id = split[0];
-                String targetToken = sync.get("token:" + id);
-                return targetToken.equals(token);
-            }
-            else {
-                return false;
-            }
-        });
+        TokenRedisClient tokenRedisClient = new TokenRedisClient(password);
+        return tokenRedisClient.verifyToken(token);
     }
 }
