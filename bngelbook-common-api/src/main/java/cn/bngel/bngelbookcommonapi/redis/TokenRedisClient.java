@@ -15,8 +15,8 @@ public class TokenRedisClient extends SimpleRedisClient{
 
     private final int defaultExpiredTime = 24*60*60*1000;
 
-    public TokenRedisClient(String password) {
-        super(password);
+    public TokenRedisClient(String host, String password) {
+        super(host, password);
     }
 
     private interface SyncTokenKeyContext {

@@ -25,8 +25,10 @@ import java.util.Arrays;
 public class TokenInterceptor implements HandlerInterceptor {
 
     private final String password;
+    private final String host;
 
-    public TokenInterceptor(String password) {
+    public TokenInterceptor(String host, String password) {
+        this.host = host;
         this.password = password;
     }
 
@@ -48,7 +50,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     }
 
     private Boolean tokenValid(String token) {
-        TokenRedisClient tokenRedisClient = new TokenRedisClient(password);
+        TokenRedisClient tokenRedisClient = new TokenRedisClient(host, password);
         return tokenRedisClient.verifyToken(token);
     }
 }

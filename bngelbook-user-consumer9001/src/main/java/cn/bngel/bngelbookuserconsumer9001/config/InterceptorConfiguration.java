@@ -13,9 +13,12 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     @Value("${bngelbook-redis-config.password}")
     private String redisPassword;
 
+    @Value("${bngelbook-redis-config.host}")
+    private String redisHost;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenInterceptor(redisPassword))
+        registry.addInterceptor(new TokenInterceptor(redisHost, redisPassword))
                 .addPathPatterns("/**")
                 .excludePathPatterns("/consumer/user/login/**",
                         // knife4j 相关资源
