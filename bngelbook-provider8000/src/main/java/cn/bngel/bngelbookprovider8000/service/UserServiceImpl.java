@@ -2,6 +2,7 @@ package cn.bngel.bngelbookprovider8000.service;
 
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
+import cn.bngel.bngelbookcommonapi.redis.TokenRedisClient;
 import cn.bngel.bngelbookprovider8000.dao.UserDao;
 import cn.hutool.core.codec.Base32;
 import cn.hutool.core.util.IdUtil;
@@ -252,16 +253,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String createToken(Long id, Integer expiredTime) {
-        SimpleRedisClient simpleRedisClient = new SimpleRedisClient(redisPassword);
-        return (String) simpleRedisClient.sync(sync -> {
-            String token = Base32.encode(id + "-" + IdUtil.objectId());
-            SetArgs args = SetArgs.Builder.ex(expiredTime);
-            String tokenSet = sync.set("token:" + id, token, args);
-            if (tokenSet.equals("OK"))
-                return token;
-            else
-                return null;
-        });
+        TokenRedisClient tokenRedisClient = new TokenRedisClient(redisPassword);
+        return tokenRedisClient.createToken(id);
     }
 
+    @Override
+    public String createToken(Long id) {
+        return createToken(id, null);
+    }
 }
