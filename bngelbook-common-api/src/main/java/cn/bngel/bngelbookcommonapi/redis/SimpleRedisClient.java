@@ -8,8 +8,12 @@ public class SimpleRedisClient {
 
     protected final RedisClient redisClient;
 
-    public SimpleRedisClient(String password) {
-        redisClient = RedisClient.create("redis://" + password + "@bngel.cn");
+    public SimpleRedisClient(String host, String password) {
+        redisClient = RedisClient.create("redis://" + password + "@" + host);
+    }
+
+    public SimpleRedisClient(String host) {
+        redisClient = RedisClient.create("redis://" + host);
     }
 
     public interface SyncContext {

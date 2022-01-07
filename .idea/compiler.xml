@@ -23,7 +23,6 @@
       <module name="bngelbook-book-consumer9002" target="1.7" />
       <module name="bngelbook-book-provider8002" target="1.7" />
       <module name="bngelbook-book-provider8006" target="1.7" />
-      <module name="bngelbook-common-api" target="8" />
       <module name="bngelbook-friend-consumer9005" target="1.7" />
       <module name="bngelbook-friend-provider8005" target="1.8" />
       <module name="bngelbook-friend-provider8009" target="1.7" />
