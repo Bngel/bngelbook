@@ -3,6 +3,7 @@ package cn.bngel.bngelbookprovider8000.service;
 import cn.bngel.bngelbookcommonapi.bean.User;
 import cn.bngel.bngelbookcommonapi.redis.SimpleRedisClient;
 import cn.bngel.bngelbookcommonapi.redis.TokenRedisClient;
+import cn.bngel.bngelbookcommonapi.utils.TencentCosUtils;
 import cn.bngel.bngelbookprovider8000.dao.UserDao;
 import cn.hutool.core.codec.Base32;
 import cn.hutool.core.util.IdUtil;
@@ -53,6 +54,9 @@ public class UserServiceImpl implements UserService{
 
     @Value("${tencent-cloud.SecretKey}")
     private String secretKey;
+
+    @Value("${tencent-cloud.region}")
+    private String region;
 
     @Value("${tencent-cloud.APPID}")
     private String appId;
@@ -219,21 +223,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String uploadFile(MultipartFile file, String bucket, String cosPath) throws IOException {
-        COSClient cosClient = getCosClient();
-        String filepath = System.getProperty("user.dir");
-        String fileName = file.getOriginalFilename();
-        File dest = new File(filepath + '\\' + fileName);
-        file.transferTo(dest);
-        cosClient.putObject(bucket, cosPath, dest);
-        return cosPath;
-    }
-
-    private COSClient getCosClient() {
-        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
-        ClientConfig clientConfig = new ClientConfig();
-        clientConfig.setRegion(new Region("ap-guangzhou"));
-        clientConfig.setHttpProtocol(HttpProtocol.https);
-        return new COSClient(cred, clientConfig);
+        TencentCosUtils tencentCosUtils = new TencentCosUtils(secretId, secretKey, region);
+        return tencentCosUtils.uploadFile(file, bucket, cosPath);
     }
 
     @Override
