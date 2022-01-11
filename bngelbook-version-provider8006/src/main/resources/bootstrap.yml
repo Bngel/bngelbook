@@ -1,0 +1,26 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: bngelbook-version-provider
+  jackson:
+    date-format: yyyy-MM-dd
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        extension-configs:
+          - bngelbook-datasource.yaml
+          - bngelbook-tencentcloud.yaml
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml

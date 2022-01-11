@@ -14,6 +14,7 @@
         <module name="bngelbook-book-provider8002" />
         <module name="bngelbook-user-consumer9001" />
         <module name="bngelbook-book-consumer9002" />
+        <module name="bngelbook-version-provider8006" />
         <module name="bngelbook-friend-provider8009" />
         <module name="bngelbook-bill-provider8004" />
         <module name="bngelbook-friend-consumer9005" />
@@ -46,6 +47,7 @@
       <module name="bngelbook-token-provider8006" options="" />
       <module name="bngelbook-user-consumer9001" options="" />
       <module name="bngelbook-user-provider8001" options="" />
+      <module name="bngelbook-version-provider8006" options="" />
     </option>
   </component>
 </project>
