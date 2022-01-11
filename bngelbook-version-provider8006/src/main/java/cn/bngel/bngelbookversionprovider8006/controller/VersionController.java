@@ -7,8 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 @RestController
 @Api(tags = "版本模块")
@@ -70,6 +72,22 @@ public class VersionController {
         }
         else {
             log.info("最新版本获取失败: " + version);
+            return CommonResult.commonFailureResult();
+        }
+    }
+
+    @ApiOperation(value = "Version - 上传最新版本APK")
+    @PostMapping("/version/apk")
+    public CommonResult uploadApk(@RequestParam("version") String version,
+                                  @RequestParam("content") String content,
+                                  @RequestPart("apk") MultipartFile apk) throws IOException {
+        Version uploadNewVersion = versionService.uploadNewVersion(apk, version, content);
+        if (uploadNewVersion != null) {
+            log.info("上传apk: " + version);
+            return CommonResult.commonSuccessResult(uploadNewVersion);
+        }
+        else {
+            log.info("上传apk失败");
             return CommonResult.commonFailureResult();
         }
     }
