@@ -150,6 +150,26 @@ public interface BngelbookService {
     @PostMapping(value = "/user/profile", headers = {"Content-Type=multipart/form-data;charset=UTF-8"})
     CommonResult<String> postUserProfile(@RequestParam("id") Long id, @RequestPart("profile") MultipartFile profile) throws IOException;
 
+    /**
+     * 版本模块
+     */
+
+    @PostMapping("/version")
+    CommonResult pushVersion(@RequestBody Version version);
+
+    @DeleteMapping("/version")
+    CommonResult deleteVersionById(@RequestParam("id") Long id);
+
+    @PutMapping("/version")
+    CommonResult updateVersionById(@RequestBody Version version);
+
+    @GetMapping("/version/newest")
+    CommonResult getNewestVersion();
+
+    @PostMapping("/version/apk")
+    CommonResult uploadApk(@RequestParam("version") String version,
+                           @RequestParam("content") String content,
+                           @RequestPart("apk") MultipartFile apk) throws IOException;
 
 
 }
