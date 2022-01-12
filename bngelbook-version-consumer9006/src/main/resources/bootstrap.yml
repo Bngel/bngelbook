@@ -1,0 +1,27 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: bngelbook-version-consumer
+  jackson:
+    date-format: yyyy-MM-dd
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        extension-configs:
+          - bngelbook-redis-config.yaml
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000

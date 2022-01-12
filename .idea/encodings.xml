@@ -23,6 +23,8 @@
     <file url="file://$PROJECT_DIR$/bngelbook-user-consumer9001/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-user-provider8001/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-user-provider8001/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bngelbook-version-consumer9006/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bngelbook-version-consumer9006/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-version-provider8006/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bngelbook-version-provider8006/src/main/resources" charset="UTF-8" />
   </component>
