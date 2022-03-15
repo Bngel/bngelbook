@@ -3,7 +3,6 @@ package cn.bngel.bngelbookversionconsumer9006.service;
 import cn.bngel.bngelbookcommonapi.bean.CommonResult;
 import cn.bngel.bngelbookcommonapi.bean.Version;
 import cn.bngel.bngelbookversionconsumer9006.config.FeignSupportConfig;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
